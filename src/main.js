@@ -12,6 +12,7 @@ import { autoTick, collectOffline, addPlayTime } from './actions.js'
 import { long } from './format.js'
 import { renderHeader } from './ui/header.js'
 import { renderPanel } from './ui/panel.js'
+import { checkAwards } from './ui/awards.js'
 import { renderRebirthButton } from './ui/rebirthButton.js'
 import { DNA_ICON } from './ui/icons.js'
 import { toast } from './ui/toast.js'
@@ -43,6 +44,7 @@ function tick(now) {
   addPlayTime(game, (now - lastTick) / 1000)
   lastTick = now
   game.colonies.forEach((c, i) => showAutoTick(i, autoTick(game, i, now)))
+  checkAwards(now)
 }
 
 function render(now, dt) {

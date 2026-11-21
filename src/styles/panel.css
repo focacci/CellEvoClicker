@@ -316,3 +316,49 @@
     color: var(--text-muted);
 }
 .stat-row b { color: var(--text-main); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* New achievement: a dot on the switcher arrows */
+.tab-arrow.has-new::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #facc15;
+    box-shadow: 0 0 8px rgba(250, 204, 21, 0.8);
+}
+
+/* Achievements tab */
+.ach-summary { text-align: center; font-weight: 700; color: var(--text-muted); margin-bottom: 0.4rem; }
+.ach-tier {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 1rem 0 0.5rem;
+}
+.ach {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: linear-gradient(180deg, #111b31 0%, #0f172a 100%);
+}
+.ach-star { width: 28px; height: 28px; flex-shrink: 0; fill: #334155; transition: fill 0.3s; }
+.ach-info { flex: 1; }
+.ach-name { font-weight: 600; color: var(--text-muted); }
+.ach-desc { font-size: 0.8rem; color: var(--text-muted); }
+.ach-bar { height: 4px; margin-top: 0.45rem; border-radius: 9999px; background: var(--border); overflow: hidden; }
+.ach-bar > i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent-primary); transition: width 0.35s ease; }
+.ach.done { border-color: rgba(250, 204, 21, 0.45); }
+.ach.done .ach-name { color: var(--text-main); }
+.ach.done .ach-star { fill: #facc15; filter: drop-shadow(0 0 6px rgba(250, 204, 21, 0.6)); }
+.ach.done .ach-bar { display: none; }
+.ach.tier-named { border-style: dashed; }
+.ach.tier-named.done { border-style: solid; border-color: #f0abfc; box-shadow: 0 0 18px -6px rgba(240, 171, 252, 0.7); }

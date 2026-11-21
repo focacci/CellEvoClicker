@@ -5,6 +5,7 @@ import { DNA_ICON, RNA_ICON } from './icons.js'
 import * as R from '../rules.js'
 import { STAGES } from '../data/stages.js'
 import { COLONIES } from '../data/colonies.js'
+import { ACHIEVEMENTS } from '../data/achievements.js'
 import { commas, short } from '../format.js'
 import { game } from '../state.js'
 
@@ -24,6 +25,7 @@ function clock(seconds) {
 const GROUPS = [
   [() => 'You', [
     ['Time played', () => clock(game.played)],
+    ['Achievements', () => `${game.achievements.length} / ${ACHIEVEMENTS.length}`],
     ['Total clicks', () => commas(game.totals.clicks)],
     ['Total crits', () => commas(game.totals.crits)],
     ['DNA earned', () => dna(game.totals.dna)],

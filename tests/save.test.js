@@ -80,3 +80,8 @@ test('a fresh game saves with v: 2 and the old field names', () => {
   const keys = Object.keys(newGame())
   for (const k of ['v', 't', 'money', 'rdna', 'frac', 'earned', 'rebirths', 'owned', 'pending', 'view', 'colonies']) assert.ok(keys.includes(k), k)
 })
+
+test('achievements in a save keep only known ids', () => {
+  const g = cleanSave({ v: 2, achievements: ['first-click', 'nope', 'first-click', 'immortality'] })
+  assert.deepEqual(g.achievements, ['first-click', 'immortality'])
+})

@@ -2,6 +2,7 @@
 import { newGame } from './state.js'
 import { MUTATIONS } from './data/mutations.js'
 import { REBIRTH } from './data/rebirth.js'
+import { ACHIEVEMENTS } from './data/achievements.js'
 
 export const SAVE_KEY = 'cellEvoClicker.save.v2'
 
@@ -40,6 +41,7 @@ export function cleanSave(d) {
   for (const k in g.totals) g.totals[k] = cleanNumber(d.totals?.[k])
   g.frac = Math.min(0.999999, cleanNumber(d.frac))
   g.owned = validIds(d.owned, REBIRTH.map(r => r.id))
+  g.achievements = validIds(d.achievements, ACHIEVEMENTS.map(a => a.id))
   g.pending = !!d.pending
   g.view = g.pending ? 0 : Math.min(2, Math.floor(cleanNumber(d.view)))
   g.colonies.forEach((c, i) => cleanColony(c, Array.isArray(d.colonies) ? d.colonies[i] : null))

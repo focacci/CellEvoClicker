@@ -2,13 +2,15 @@
 import { $, setText } from './dom.js'
 import { mutationsTab, renderMutations } from './mutationsTab.js'
 import { rebirthTab, renderRebirthTab } from './rebirthTab.js'
+import { achievementsTab, renderAchievements } from './achievementsTab.js'
 import { statsTab, renderStats } from './statsTab.js'
 import { game } from '../state.js'
 
-const TABS = ['mutations', 'stats']
+const TABS = ['mutations', 'achievements', 'stats']
 const PAGES = {
   mutations: { title: 'Mutations', el: mutationsTab, render: () => renderMutations(game.view) },
   rebirth: { title: 'Rebirth Mutations', el: rebirthTab, render: renderRebirthTab },
+  achievements: { title: 'Achievements', el: achievementsTab, render: renderAchievements },
   stats: { title: 'Stats', el: statsTab, render: renderStats }
 }
 const panel = $('#upgrades-pane'), list = $('#upgrades-container'), title = $('#pane-title')
@@ -18,6 +20,11 @@ let shown = null
 list.append(...Object.values(PAGES).map(p => p.el))
 $('#tab-prev').addEventListener('click', () => { tab = (tab + TABS.length - 1) % TABS.length })
 $('#tab-next').addEventListener('click', () => { tab = (tab + 1) % TABS.length })
+
+// A dot on the arrows until the player looks at a newly earned achievement
+export function markNew() {
+  for (const arrow of title.querySelectorAll('.tab-arrow')) arrow.classList.add('has-new')
+}
 
 // While the cell is dormant after a rebirth, the Mutations slot shows Rebirth Mutations
 function page() {
@@ -40,5 +47,6 @@ export function renderPanel() {
   title.classList.toggle('rebirth-mode', p === PAGES.rebirth)
   title.classList.toggle('no-arrows', locked)
   panel.classList.toggle('greyed', locked)
+  if (p === PAGES.achievements) title.querySelectorAll('.has-new').forEach(a => a.classList.remove('has-new'))
   p.render()
 }
