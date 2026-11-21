@@ -1,0 +1,222 @@
+.simulation-pane {
+    flex: 1;
+    position: relative;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Canvases: ambient plankton behind the cells, floating yields above them */
+.pane-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+#ambient-canvas { z-index: 0; }
+#fx-canvas { z-index: 5; }
+
+/* Every colony lives on its own screen; JS slides them horizontally */
+.screen-track { position: absolute; inset: 0; z-index: 1; }
+.screen {
+    position: absolute;
+    inset: 0;
+    will-change: transform, opacity;
+}
+.screen.offscreen {
+    visibility: hidden;
+    content-visibility: hidden;
+}
+.screen-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: filter 0.45s ease;
+}
+.screen.locked .screen-content {
+    filter: grayscale(1) brightness(0.5);
+    pointer-events: none;
+}
+.screen.dormant .screen-content { filter: grayscale(1) brightness(0.62); }
+
+/* ---------- Screen navigation arrows ---------- */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 6;
+    width: 52px;
+    height: 52px;
+    margin-top: -26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(15, 23, 42, 0.72);
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    color: #cbd5e1;
+    cursor: pointer;
+    box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.25s, border-color 0.25s, color 0.25s, opacity 0.3s, box-shadow 0.25s;
+}
+.nav-arrow svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+}
+.nav-arrow.left { left: 1.25rem; }
+.nav-arrow.right { right: 1.25rem; }
+.nav-arrow:hover {
+    background: rgba(37, 99, 235, 0.22);
+    border-color: rgba(96, 165, 250, 0.65);
+    color: #ffffff;
+    transform: scale(1.08);
+    box-shadow: 0 6px 22px -6px rgba(37, 99, 235, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.nav-arrow.left:hover svg { transform: translateX(-2px); }
+.nav-arrow.right:hover svg { transform: translateX(2px); }
+.nav-arrow:active { transform: scale(0.95); }
+.nav-arrow.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+/* ---------- Locked colonies ---------- */
+.lock-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+.lock-overlay.gone { opacity: 0; transform: scale(1.18); }
+.lock-overlay.removed { display: none; }
+.lock-btn {
+    pointer-events: auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    color: #64748b;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lock-btn:hover { transform: translateY(-2px) scale(1.03); }
+.lock-icon {
+    width: 92px;
+    height: 104px;
+    overflow: visible;
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.55));
+    transition: color 0.3s;
+}
+.lock-icon .shackle { transform-box: fill-box; transform-origin: 100% 100%; }
+.lock-icon .lock-body-g { transform-box: fill-box; transform-origin: 50% 50%; }
+.lock-price {
+    display: inline-flex;
+    align-items: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #94a3b8;
+    background: rgba(15, 23, 42, 0.82);
+    border: 1px solid #475569;
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.lock-caption {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #64748b;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+.lock-btn.affordable .lock-price {
+    color: var(--accent-success);
+    border-color: rgba(16, 185, 129, 0.55);
+    box-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
+}
+.lock-btn.affordable .lock-caption { color: #94a3b8; }
+.lock-btn.denied { animation: lockShake 0.4s ease; }
+.lock-btn.unlocking { pointer-events: none; }
+.lock-btn.unlocking .lock-icon { color: var(--accent-success); }
+.lock-btn.unlocking .shackle { animation: shackleOpen 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.lock-btn.unlocking .lock-body-g { animation: lockThump 0.55s ease; }
+@keyframes shackleOpen {
+    0%   { transform: translateY(0) rotate(0deg); }
+    45%  { transform: translateY(-12px) rotate(0deg); }
+    100% { transform: translateY(-12px) rotate(28deg); }
+}
+@keyframes lockThump {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+@keyframes lockShake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-7px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(3px); }
+}
+
+/* ---------- Rebirth visuals on the simulation pane ---------- */
+.rebirth-hint {
+    position: absolute;
+    left: 50%;
+    bottom: 4.5rem;
+    z-index: 3;
+    transform: translateX(-50%);
+    color: var(--rebirth-text);
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 0.55rem 1.3rem;
+    border-radius: 9999px;
+    background: rgba(21, 1, 26, 0.88);
+    border: 1px solid var(--rebirth-border);
+    box-shadow: 0 0 0 1px #000, 0 0 24px -6px rgba(191, 64, 191, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    transition: opacity 0.4s ease;
+}
+.screen.dormant .rebirth-hint {
+    opacity: 1;
+    animation: hintFloat 2.4s ease-in-out infinite;
+}
+@keyframes hintFloat {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, -5px); }
+}
+
+.rebirth-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at center, rgba(231, 198, 255, 0.85) 0%, rgba(191, 64, 191, 0.55) 30%, rgba(21, 1, 26, 0) 70%);
+}
+.rebirth-flash.go { animation: rebirthFlash 1.3s ease-out; }
+@keyframes rebirthFlash {
+    0%   { opacity: 0; transform: scale(0.6); }
+    28%  { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0; transform: scale(1.4); }
+}

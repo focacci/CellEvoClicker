@@ -1,0 +1,84 @@
+:root {
+    --bg-dark: #0f172a;
+    --panel-bg: #1e293b;
+    --border: #334155;
+    --accent-primary: #3b82f6;
+    --accent-success: #10b981;
+    --accent-purple: #8b5cf6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+
+    /* Rebirth palette */
+    --rebirth: #BF40BF;
+    --rebirth-border: #9932cc;
+    --rebirth-bg: #15011a;
+    --rebirth-text: #e7c6ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button { -webkit-tap-highlight-color: transparent; }
+
+/* ================= Layout ================= */
+.game-layout {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ================= Toasts ================= */
+#toast-stack {
+    position: fixed;
+    left: calc((100vw - 450px) / 2);
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    z-index: 9000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    pointer-events: none;
+}
+.toast {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid #475569;
+    color: var(--text-main);
+    padding: 0.65rem 1.2rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.8);
+    animation: toastIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.toast.purple {
+    background: var(--rebirth-bg);
+    border-color: var(--rebirth-border);
+    color: var(--rebirth-text);
+    box-shadow: 0 0 0 1px #000, 0 10px 28px -10px rgba(191, 64, 191, 0.6);
+}
+.toast.out { opacity: 0; transform: translateY(8px); }
+
+@keyframes toastIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}

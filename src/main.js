@@ -1,0 +1,7 @@
+import './styles/base.css'
+import './styles/header.css'
+import './styles/colony.css'
+import './styles/stage.css'
+import './styles/cells.css'
+import './styles/panel.css'
+import './styles/popups.css'

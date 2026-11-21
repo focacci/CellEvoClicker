@@ -1,0 +1,233 @@
+.cell-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: width 0.6s ease, height 0.6s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- Multicellular mass ---------- */
+.cell-mass {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, filter;
+}
+/* Click cooldown dims the whole mass in one GPU-friendly filter instead of every cell */
+.cell-mass.cooldown { filter: saturate(0.5) brightness(0.7); }
+.no-anim, .no-anim * { transition: none !important; }
+
+.mass-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.layer-features { z-index: 1; pointer-events: none; }
+.layer-bodies { z-index: 2; }
+.layer-junctions { z-index: 3; pointer-events: none; }
+.layer-fx { z-index: 4; pointer-events: none; }
+
+.cell-feat,
+.cell-body {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    transition: left 0.7s cubic-bezier(0.34, 1.3, 0.64, 1),
+                top 0.7s cubic-bezier(0.34, 1.3, 0.64, 1),
+                transform 0.7s cubic-bezier(0.34, 1.3, 0.64, 1),
+                opacity 0.5s ease;
+}
+
+.cell-feat { pointer-events: none; }
+
+.feat-rot {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.feat-svg {
+    position: absolute;
+    left: -150px;
+    top: -150px;
+    width: 500px;
+    height: 500px;
+    overflow: visible;
+}
+
+/* Moving parts of a cell's surroundings live on their own GPU layer, so the static
+   artwork around them is painted once instead of every frame */
+.feat-layer { position: absolute; inset: 0; will-change: transform; }
+.feat-spin { animation: rotate var(--dur) linear infinite; }
+.feat-spin.rev { animation-direction: reverse; }
+.feat-pulse { animation: featPulse var(--dur) ease-in-out infinite; }
+.feat-breathe { animation: featBreathe var(--dur) ease-in-out infinite; }
+@keyframes featPulse { 0%, 100% { opacity: var(--lo); } 50% { opacity: var(--hi); } }
+@keyframes featBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+
+/* Static outer glow for cells whose outline animates (avoids re-blurring the glow every frame) */
+.cell-glow.halo-glow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    border-radius: 50%;
+    box-shadow: 0 0 50px var(--halo);
+    will-change: transform;
+}
+
+.cell-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cell-glow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.5s ease;
+    will-change: transform;
+}
+
+.cell-sphere {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb, #1e3a8a);
+    box-shadow: 0 0 50px rgba(37, 99, 235, 0.4), inset -10px -10px 30px rgba(0,0,0,0.7), inset 15px 15px 30px rgba(255,255,255,0.2);
+    transition: width 0.5s ease, height 0.5s ease, background 0.5s ease, border-radius 0.5s ease, box-shadow 0.5s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.organelles {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+}
+/* Own GPU layer, only for stages whose organelles move: animated organelles then no longer force the
+   cell's big glow shadow to repaint, while static ones don't pay for an extra layer */
+.organelles.live { will-change: transform; }
+
+.org-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.nucleus {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #f43f5e, #be123c);
+    box-shadow: inset -2px -2px 5px rgba(0,0,0,0.5);
+    top: 40%;
+    left: 40%;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s, width 0.5s, height 0.5s, top 0.5s, left 0.5s, border-radius 0.5s;
+}
+.chromatin {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(30, 27, 75, 0.38);
+}
+
+@keyframes rotate { 100% { transform: rotate(360deg); } }
+
+/* ---------- Stage-specific living details ---------- */
+.cell-sphere.amoeba { animation: amoeba 6s ease-in-out infinite; }
+@keyframes amoeba {
+    0%, 100% { border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%; }
+    33%      { border-radius: 45% 55% 40% 60% / 60% 45% 55% 40%; }
+    66%      { border-radius: 52% 48% 60% 40% / 42% 58% 48% 52%; }
+}
+
+.stem-sheen {
+    position: absolute;
+    inset: 6%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(255,255,255,0), rgba(255,255,255,0.35), rgba(255,255,255,0) 40%, rgba(255,255,255,0.2) 70%, rgba(255,255,255,0));
+    animation: rotate 9s linear infinite;
+}
+.chimera-sheen {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(240,171,252,0.55), rgba(34,211,238,0.45), rgba(163,230,53,0.4), rgba(99,102,241,0.5), rgba(240,171,252,0.55));
+    animation: rotate 12s linear infinite;
+}
+.galaxy-sheen {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, rgba(192,132,252,0.55), rgba(34,211,238,0.3), rgba(244,114,182,0.4), rgba(99,102,241,0.55), rgba(192,132,252,0.55));
+    animation: rotate 16s linear infinite;
+}
+
+.junction {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+}
+.junction.adhesion {
+    width: 30px;
+    height: 12px;
+    margin: -6px 0 0 -15px;
+    background: linear-gradient(90deg, #fde68a, #f59e0b);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
+    animation: junctionPulse 2.6s ease-in-out infinite;
+}
+.junction.synapse {
+    width: 64px;
+    height: 4px;
+    margin: -2px 0 0 -32px;
+    background: linear-gradient(90deg, transparent, #d9f99d, transparent);
+    box-shadow: 0 0 10px rgba(132, 204, 22, 0.9);
+    animation: synapseFire 1.8s ease-in-out infinite;
+}
+@keyframes junctionPulse { 0%, 100% { opacity: 0.6; } 50% { opacity: 1; } }
+@keyframes synapseFire { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+
+/* ---------- Phase change animation ---------- */
+.cell-body.evolving { animation: evolveMorph 0.9s cubic-bezier(0.34, 1.2, 0.64, 1); }
+.cell-feat.evolving { animation: evolveFeat 0.9s ease; }
+
+@keyframes evolveMorph {
+    0%   { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    25%  { transform: scale(0.78) rotate(-6deg); filter: brightness(1.9) saturate(1.4); }
+    45%  { transform: scale(1.14) rotate(3deg); filter: brightness(1.5); }
+    70%  { transform: scale(0.96) rotate(0deg); filter: brightness(1.1); }
+    100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+}
+@keyframes evolveFeat {
+    0%   { transform: scale(1); opacity: 1; }
+    25%  { transform: scale(0.6); opacity: 0; }
+    55%  { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.evolve-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 3px solid currentColor;
+    box-shadow: 0 0 18px currentColor, inset 0 0 18px currentColor;
+    animation: evolveRing 0.9s ease-out forwards;
+}
+@keyframes evolveRing {
+    0%   { transform: scale(0.55); opacity: 0.9; }
+    100% { transform: scale(1.7); opacity: 0; }
+}

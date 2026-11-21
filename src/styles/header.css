@@ -1,0 +1,96 @@
+/* ================= Header ================= */
+header {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(180deg, #212d42 0%, var(--panel-bg) 100%);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.45);
+}
+/* Soft accent line riding on the header border */
+header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.45), rgba(191, 64, 191, 0.35), transparent);
+    pointer-events: none;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #3b82f6, #5196b4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats-container { text-align: right; }
+
+.currency-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.1rem;
+}
+.currency-divider {
+    width: 1px;
+    height: 1.7rem;
+    background: linear-gradient(transparent, #475569, transparent);
+}
+
+#dna-counter,
+#rdna-counter {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    transform-origin: right center;
+    white-space: nowrap;
+}
+#dna-counter {
+    color: var(--accent-success);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+#rdna-counter {
+    color: var(--rebirth);
+    text-shadow: 0 0 12px rgba(191, 64, 191, 0.3);
+}
+.bump { animation: bump 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes bump {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.07); }
+    100% { transform: scale(1); }
+}
+
+#dps-counter {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* DNA currency symbol (replaces the $ sign everywhere) */
+.dna-icon {
+    display: inline-block;
+    height: 0.9em;
+    width: 0.55em;
+    vertical-align: -0.1em;
+    margin-right: 0.12em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    overflow: visible;
+    pointer-events: none;
+}
+.dna-icon .rung { stroke-width: 1.3; opacity: 0.85; }
+/* RNA symbol: bars as bold as the strand, like the reference */
+.rna-icon { width: 0.66em; }
+.rna-icon path { stroke-width: 110; } /* main strand: a little bolder than the DNA helix strands */
+.rna-icon .rung { stroke-width: 78; opacity: 1; }

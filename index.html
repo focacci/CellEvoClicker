@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cellular Evolution Clicker</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 260'>
+          <defs>
+            <radialGradient id='bg' cx='130' cy='130' r='184' gradientUnits='userSpaceOnUse'>
+              <stop offset='0' stop-color='%234b6a9e'/><stop offset='1' stop-color='%231a2744'/>
+            </radialGradient>
+            <radialGradient id='c' cx='90' cy='90' r='198' gradientUnits='userSpaceOnUse'>
+              <stop offset='0' stop-color='%2360a5fa'/><stop offset='0.5' stop-color='%232563eb'/><stop offset='1' stop-color='%231e3a8a'/>
+            </radialGradient>
+            <clipPath id='k'><circle cx='130' cy='130' r='100'/></clipPath>
+            <filter id='b25' x='-100%' y='-100%' width='300%' height='300%'><feGaussianBlur stdDeviation='25'/></filter>
+            <filter id='b15' x='-20%' y='-20%' width='140%' height='140%'><feGaussianBlur stdDeviation='15'/></filter>
+          </defs>
+          <rect x='2.5' y='2.5' width='255' height='255' rx='58' fill='url(%23bg)' stroke='%2360a5fa' stroke-width='5'/>
+          <circle cx='130' cy='130' r='100' fill='%232563eb' opacity='0.4' filter='url(%23b25)'/>
+          <circle cx='130' cy='130' r='100' fill='url(%23c)'/>
+          <g clip-path='url(%23k)'>
+            <path transform='translate(-10 -10)' fill='%23000' fill-opacity='0.7' fill-rule='evenodd' filter='url(%23b15)' d='M-200 -200H460V460H-200ZM30 130 a100 100 0 1 0 200 0 a100 100 0 1 0 -200 0Z'/>
+            <path transform='translate(15 15)' fill='%23fff' fill-opacity='0.2' fill-rule='evenodd' filter='url(%23b15)' d='M-200 -200H460V460H-200ZM30 130 a100 100 0 1 0 200 0 a100 100 0 1 0 -200 0Z'/>
+          </g>
+          <circle cx='130' cy='130' r='98' fill='none' stroke='%233b82f6' stroke-opacity='0.7' stroke-width='4'/>
+        </svg>">
+</head>
+<body>
+
+    <!-- Shared SVG gradients used by the cell artwork -->
+    <svg id="bio-defs" width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="bio-defs-inner"></defs></svg>
+
+    <header>
+        <div class="logo">Cellular Evolution clicker</div>
+        <div class="stats-container">
+            <div class="currency-row">
+                <div id="rdna-counter" title="RNA"></div>
+                <div class="currency-divider"></div>
+                <div id="dna-counter" title="DNA"></div>
+            </div>
+            <div id="dps-counter">Generation Rate: 0/s</div>
+        </div>
+    </header>
+
+    <div class="game-layout">
+        <div class="simulation-pane" id="simulation-pane">
+            <canvas id="ambient-canvas" class="pane-canvas"></canvas>
+            <div class="screen-track" id="screen-track">
+                <!-- One screen per colony, built by JavaScript -->
+            </div>
+            <canvas id="fx-canvas" class="pane-canvas"></canvas>
+            <div class="rebirth-flash" id="rebirth-flash"></div>
+            <button class="nav-arrow left hidden" id="nav-left" type="button" aria-label="Previous colony">
+                <svg viewBox="0 0 24 24"><path d="M14.5 5 L7.5 12 L14.5 19"/></svg>
+            </button>
+            <button class="nav-arrow right" id="nav-right" type="button" aria-label="Next colony">
+                <svg viewBox="0 0 24 24"><path d="M9.5 5 L16.5 12 L9.5 19"/></svg>
+            </button>
+        </div>
+
+        <div class="upgrades-pane" id="upgrades-pane">
+            <div class="pane-title" id="pane-title">Mutations</div>
+            <div class="upgrades-list" id="upgrades-container">
+                <!-- Upgrades injected by JavaScript -->
+            </div>
+            <div class="rebirth-bar" id="rebirth-bar">
+                <button class="rebirth-btn" id="rebirth-btn" type="button">
+                    <span class="rb-fill" id="rb-fill"></span>
+                    <span class="rb-title" id="rb-title">Rebirth</span>
+                    <span class="rb-sub" id="rb-sub"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-stack"></div>
+
+    <!-- Reset confirmation (opened with Esc) -->
+    <div class="modal-backdrop" id="reset-modal" hidden>
+        <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="reset-title" aria-describedby="reset-desc">
+            <div class="modal-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z"/><path class="mark" d="M12 9.5 V14 M12 17 V17.2"/></svg>
+            </div>
+            <h2 id="reset-title">Reset all progress?</h2>
+            <p id="reset-desc">This erases your DNA, RNA, mutations, colonies and rebirth mutations, and starts a brand new game. It can't be undone.</p>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn" id="reset-cancel">Cancel</button>
+                <button type="button" class="modal-btn danger" id="reset-confirm">Reset game</button>
+            </div>
+            <div class="modal-hint">Press <kbd>Esc</kbd> to cancel · the game keeps running</div>
+        </div>
+    </div>
+
+    <!-- Clicker Game Ambient Music System + volume controls -->
+    <div id="sound-dock">
+      <button id="bgm-toggle-btn">🎵 Music: Off</button>
+      <div id="volume-wrap">
+        <button id="volume-btn" type="button" aria-label="Volume" aria-expanded="false" aria-controls="volume-panel" title="Volume">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path class="vol-speaker" d="M4 9.5 H7.5 L12 5.5 V18.5 L7.5 14.5 H4 Z"/>
+            <path class="vol-wave1" d="M15.2 9.2 C16.4 10.6 16.4 13.4 15.2 14.8"/>
+            <path class="vol-wave2" d="M17.8 6.8 C20.4 9.6 20.4 14.4 17.8 17.2"/>
+            <path class="vol-mute" d="M15.5 9.5 L20.5 14.5 M20.5 9.5 L15.5 14.5"/>
+          </svg>
+        </button>
+        <div id="volume-panel" role="dialog" aria-label="Volume">
+          <div class="vol-title">Volume</div>
+          <label class="vol-row">
+            <span class="vol-label">🎵 Music</span>
+            <span class="vol-value" id="vol-music-val">100%</span>
+            <input type="range" id="vol-music" min="0" max="150" step="5" value="100">
+          </label>
+          <label class="vol-row">
+            <span class="vol-label">🔊 Effects <small>clicks &amp; purchases</small></span>
+            <span class="vol-value" id="vol-sfx-val">100%</span>
+            <input type="range" id="vol-sfx" min="0" max="150" step="5" value="100">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
