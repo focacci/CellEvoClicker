@@ -1,0 +1,17 @@
+{
+  "name": "cellevo-clicker",
+  "version": "1.0.0",
+  "description": "Cellular Evolution Clicker: click a cell, mutate it, evolve it.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8",
+    "vite-plugin-singlefile": "^2.3.4"
+  }
+}

@@ -1,0 +1,1637 @@
+[
+ {
+  "colonies": [
+   {
+    "costs": [
+     56,
+     183,
+     314,
+     400,
+     1500,
+     4000,
+     12000,
+     25000,
+     60000,
+     150000,
+     500000,
+     5000000
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 27,
+    "auto": 6,
+    "perSecond": 6,
+    "critMult": 10,
+    "stage": 1,
+    "cells": 1,
+    "stats": {
+     "clickPower": 27,
+     "autoPower": 6,
+     "clickCooldown": 250,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000,
+     600000000,
+     1500000000,
+     4000000000,
+     15000000000,
+     40000000000,
+     120000000000,
+     250000000000,
+     600000000000,
+     1500000000000,
+     5000000000000,
+     50000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 500000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000000,
+     600000000000,
+     1500000000000,
+     4000000000000,
+     15000000000000,
+     40000000000000,
+     120000000000000,
+     250000000000000,
+     600000000000000,
+     1500000000000000,
+     5000000000000000,
+     50000000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 2000000000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   }
+  ],
+  "rebirth": {
+   "total": 0,
+   "whole": 0,
+   "frac": 0
+  },
+  "offline": 0,
+  "totalPerSecond": 6,
+  "resaved": {
+   "v": 2,
+   "money": 1234.5,
+   "rdna": 0,
+   "frac": 0,
+   "earned": 0,
+   "rebirths": 0,
+   "owned": [],
+   "pending": false,
+   "view": 0,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 7,
+      "clickCooldown": 2,
+      "autoClickPower": 3,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  },
+  "oldReadsNew": {
+   "v": 2,
+   "money": 1234.5,
+   "rdna": 0,
+   "frac": 0,
+   "earned": 0,
+   "rebirths": 0,
+   "owned": [],
+   "pending": false,
+   "view": 0,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 7,
+      "clickCooldown": 2,
+      "autoClickPower": 3,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "colonies": [
+   {
+    "costs": [
+     32578868,
+     15193,
+     25373873801,
+     192512,
+     1651611,
+     1605064,
+     1984398,
+     394264,
+     522320,
+     1837526,
+     36118773,
+     31772000
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "maxed": [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 338782.5,
+    "auto": 484704,
+    "perSecond": 14913969.230769232,
+    "critMult": 50,
+    "stage": 11,
+    "cells": 10,
+    "stats": {
+     "clickPower": 4212,
+     "autoPower": 19584,
+     "clickCooldown": 50,
+     "autoCooldown": 325,
+     "critChance": 5.5,
+     "autoCritChance": 3
+    }
+   },
+   {
+    "costs": [
+     1934281311,
+     3215625000,
+     4026531840,
+     4000000000,
+     15000000000,
+     40000000000,
+     120000000000,
+     250000000000,
+     600000000000,
+     1500000000000,
+     5000000000000,
+     50000000000000
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 137250000,
+    "auto": 22500000,
+    "perSecond": 22500000,
+    "critMult": 20,
+    "stage": 2,
+    "cells": 1,
+    "stats": {
+     "clickPower": 61,
+     "autoPower": 10,
+     "clickCooldown": 225,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000000,
+     600000000000,
+     1500000000000,
+     4000000000000,
+     15000000000000,
+     40000000000000,
+     120000000000000,
+     250000000000000,
+     600000000000000,
+     1500000000000000,
+     5000000000000000,
+     50000000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 9000000000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 20,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   }
+  ],
+  "rebirth": {
+   "total": 0.42,
+   "whole": 0,
+   "frac": 0.42
+  },
+  "offline": 0,
+  "totalPerSecond": 37413969.23076923,
+  "resaved": {
+   "v": 2,
+   "money": 3200000000000,
+   "rdna": 5,
+   "frac": 0.42,
+   "earned": 12,
+   "rebirths": 3,
+   "owned": [
+    "primordial",
+    "memory",
+    "membrane",
+    "metabolism",
+    "lucky"
+   ],
+   "pending": false,
+   "view": 1,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 61,
+      "clickCooldown": 10,
+      "autoClickPower": 77,
+      "autoClickCooldown": 9,
+      "ribosomalSynthesis": 21,
+      "chloroplastSymbiosis": 18,
+      "critChance": 11,
+      "autoCritChance": 6,
+      "critPower": 3,
+      "endocyticUptake": 4,
+      "extraCells": 9,
+      "telomerase": 2
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 12,
+      "clickCooldown": 3,
+      "autoClickPower": 4,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  },
+  "oldReadsNew": {
+   "v": 2,
+   "money": 3200000000000,
+   "rdna": 5,
+   "frac": 0.42,
+   "earned": 12,
+   "rebirths": 3,
+   "owned": [
+    "primordial",
+    "memory",
+    "membrane",
+    "metabolism",
+    "lucky"
+   ],
+   "pending": false,
+   "view": 1,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 61,
+      "clickCooldown": 10,
+      "autoClickPower": 77,
+      "autoClickCooldown": 9,
+      "ribosomalSynthesis": 21,
+      "chloroplastSymbiosis": 18,
+      "critChance": 11,
+      "autoCritChance": 6,
+      "critPower": 3,
+      "endocyticUptake": 4,
+      "extraCells": 9,
+      "telomerase": 2
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 12,
+      "clickCooldown": 3,
+      "autoClickPower": 4,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "colonies": [
+   {
+    "costs": [
+     88587565266971670000,
+     7212,
+     112554879747248550000,
+     731136,
+     392059181468,
+     194392803330,
+     64737977,
+     134870786,
+     10127070,
+     41039824,
+     3890977875135,
+     31497908217
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "maxed": [
+     false,
+     true,
+     false,
+     true,
+     false,
+     false,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "click": 1595810438509888,
+    "auto": 602277180792101.2,
+    "perSecond": 222842556893077470,
+    "critMult": 100,
+    "stage": 19,
+    "cells": 37,
+    "stats": {
+     "clickPower": 1083008,
+     "autoPower": 750720,
+     "clickCooldown": 50,
+     "autoCooldown": 100,
+     "critChance": 10,
+     "autoCritChance": 10
+    }
+   },
+   {
+    "costs": [
+     683164586681513600,
+     72129009170,
+     1.1255487974724853e+27,
+     7311360000000,
+     3920591814682176000,
+     1943928033300696000,
+     647379776403634,
+     1348707867507572,
+     101270705939077,
+     410398247631554,
+     38909778751352410000,
+     314979082176595300
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "maxed": [
+     false,
+     true,
+     false,
+     true,
+     false,
+     false,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "click": 304706239158304000000,
+    "auto": 273762354905500550000,
+    "perSecond": 1.0129207131503521e+23,
+    "critMult": 100,
+    "stage": 18,
+    "cells": 37,
+    "stats": {
+     "clickPower": 19576,
+     "autoPower": 750720,
+     "clickCooldown": 50,
+     "autoCooldown": 100,
+     "critChance": 10,
+     "autoCritChance": 10
+    }
+   },
+   {
+    "costs": [
+     4.972296096248805e+85,
+     72129009170293,
+     1.1255487974724855e+30,
+     7311360000000000,
+     3.9205918146821756e+21,
+     1.9439280333006968e+21,
+     647379776403634400,
+     1348707867507572200,
+     101270705939077500,
+     410398247631554200,
+     3.89097787513524e+22,
+     314979082176595360000
+    ],
+    "revealed": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "maxed": [
+     false,
+     true,
+     false,
+     true,
+     false,
+     false,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "click": 5.7888337966103725e+32,
+    "auto": 1.2045543615842024e+25,
+    "perSecond": 4.4568511378615486e+27,
+    "critMult": 100,
+    "stage": 20,
+    "cells": 37,
+    "stats": {
+     "clickPower": 33259421433856,
+     "autoPower": 750720,
+     "clickCooldown": 50,
+     "autoCooldown": 100,
+     "critChance": 10,
+     "autoCritChance": 10
+    }
+   }
+  ],
+  "rebirth": {
+   "total": 28.747873851023215,
+   "whole": 28,
+   "frac": 0.7478738510232148
+  },
+  "offline": 8.022514374280272e+30,
+  "totalPerSecond": 4.4569524301557064e+27,
+  "resaved": {
+   "v": 2,
+   "money": 7700000000000000,
+   "rdna": 1234,
+   "frac": 0.999,
+   "earned": 98765,
+   "rebirths": 150,
+   "owned": [
+    "primordial",
+    "memory",
+    "reserve",
+    "membrane",
+    "metabolism",
+    "reflex",
+    "lucky",
+    "spores",
+    "telo1",
+    "echo",
+    "colony2",
+    "budding",
+    "overclock",
+    "hyperplasia",
+    "colony3",
+    "leap",
+    "telo2",
+    "hereditary",
+    "quantum",
+    "apex"
+   ],
+   "pending": false,
+   "view": 2,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 180,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 95,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 700,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    }
+   ]
+  },
+  "oldReadsNew": {
+   "v": 2,
+   "money": 7700000000000000,
+   "rdna": 1234,
+   "frac": 0.999,
+   "earned": 98765,
+   "rebirths": 150,
+   "owned": [
+    "primordial",
+    "memory",
+    "reserve",
+    "membrane",
+    "metabolism",
+    "reflex",
+    "lucky",
+    "spores",
+    "telo1",
+    "echo",
+    "colony2",
+    "budding",
+    "overclock",
+    "hyperplasia",
+    "colony3",
+    "leap",
+    "telo2",
+    "hereditary",
+    "quantum",
+    "apex"
+   ],
+   "pending": false,
+   "view": 2,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 180,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 95,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 700,
+      "clickCooldown": 10,
+      "autoClickPower": 170,
+      "autoClickCooldown": 12,
+      "ribosomalSynthesis": 60,
+      "chloroplastSymbiosis": 55,
+      "critChance": 20,
+      "autoCritChance": 20,
+      "critPower": 8,
+      "endocyticUptake": 10,
+      "extraCells": 36,
+      "telomerase": 10
+     }
+    }
+   ]
+  }
+ },
+ {
+  "colonies": [
+   {
+    "costs": [
+     10,
+     60,
+     150,
+     400,
+     1500,
+     4000,
+     12000,
+     25000,
+     60000,
+     150000,
+     500000,
+     5000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 1,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000,
+     600000000,
+     1500000000,
+     4000000000,
+     15000000000,
+     40000000000,
+     120000000000,
+     250000000000,
+     600000000000,
+     1500000000000,
+     5000000000000,
+     50000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 500000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000000,
+     600000000000,
+     1500000000000,
+     4000000000000,
+     15000000000000,
+     40000000000000,
+     120000000000000,
+     250000000000000,
+     600000000000000,
+     1500000000000000,
+     5000000000000000,
+     50000000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 2000000000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   }
+  ],
+  "rebirth": {
+   "total": 0.25,
+   "whole": 0,
+   "frac": 0.25
+  },
+  "offline": 0,
+  "totalPerSecond": 0,
+  "resaved": {
+   "v": 2,
+   "money": 0,
+   "rdna": 3,
+   "frac": 0.25,
+   "earned": 70,
+   "rebirths": 9,
+   "owned": [
+    "reserve",
+    "spores",
+    "colony2",
+    "leap"
+   ],
+   "pending": true,
+   "view": 0,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  },
+  "oldReadsNew": {
+   "v": 2,
+   "money": 0,
+   "rdna": 3,
+   "frac": 0.25,
+   "earned": 70,
+   "rebirths": 9,
+   "owned": [
+    "reserve",
+    "spores",
+    "colony2",
+    "leap"
+   ],
+   "pending": true,
+   "view": 0,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  }
+ },
+ {
+  "colonies": [
+   {
+    "costs": [
+     1.621696755662236e+108,
+     60,
+     150,
+     400,
+     1500,
+     4000,
+     145071098,
+     25000,
+     60000,
+     150000,
+     500000,
+     5000000
+    ],
+    "revealed": [
+     true,
+     true,
+     false,
+     false,
+     false,
+     false,
+     true,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 6926950742779494000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 20,
+    "cells": 1,
+    "stats": {
+     "clickPower": 277078029711179780,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 10,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000,
+     600000000,
+     2457600000,
+     4000000000,
+     15000000000,
+     40000000000,
+     120000000000,
+     250000000000,
+     600000000000,
+     1500000000000,
+     5000000000000,
+     50000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 12500000,
+    "auto": 37500000,
+    "perSecond": 37500000,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 3,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   },
+   {
+    "costs": [
+     100000000000,
+     600000000000,
+     1500000000000,
+     4000000000000,
+     15000000000000,
+     40000000000000,
+     120000000000000,
+     250000000000000,
+     600000000000000,
+     1500000000000000,
+     5000000000000000,
+     50000000000000000
+    ],
+    "revealed": [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "maxed": [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "click": 50000000000,
+    "auto": 0,
+    "perSecond": 0,
+    "critMult": 10,
+    "stage": 0,
+    "cells": 1,
+    "stats": {
+     "clickPower": 1,
+     "autoPower": 0,
+     "clickCooldown": 300,
+     "autoCooldown": 1000,
+     "critChance": 0,
+     "autoCritChance": 0
+    }
+   }
+  ],
+  "rebirth": {
+   "total": 0.999999,
+   "whole": 0,
+   "frac": 0.999999
+  },
+  "offline": 67500000000,
+  "totalPerSecond": 37500000,
+  "resaved": {
+   "v": 2,
+   "money": 0,
+   "rdna": 3,
+   "frac": 0.999999,
+   "earned": 0,
+   "rebirths": 0,
+   "owned": [
+    "apex",
+    "spores"
+   ],
+   "pending": false,
+   "view": 2,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 1000,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 20,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 2,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  },
+  "oldReadsNew": {
+   "v": 2,
+   "money": 0,
+   "rdna": 3,
+   "frac": 0.999999,
+   "earned": 0,
+   "rebirths": 0,
+   "owned": [
+    "apex",
+    "spores"
+   ],
+   "pending": false,
+   "view": 2,
+   "colonies": [
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 1000,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 20,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": true,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 2,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    },
+    {
+     "unlocked": false,
+     "levels": {
+      "clickPower": 0,
+      "clickCooldown": 0,
+      "autoClickPower": 0,
+      "autoClickCooldown": 0,
+      "ribosomalSynthesis": 0,
+      "chloroplastSymbiosis": 0,
+      "critChance": 0,
+      "autoCritChance": 0,
+      "critPower": 0,
+      "endocyticUptake": 0,
+      "extraCells": 0,
+      "telomerase": 0
+     }
+    }
+   ]
+  }
+ }
+]

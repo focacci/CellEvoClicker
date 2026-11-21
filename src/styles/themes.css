@@ -1,0 +1,62 @@
+/* ================= Themes tab ================= */
+.theme-swatch {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    margin-right: 0.9rem;
+    border-radius: 0.6rem;
+    border: 3px solid var(--accent-primary);
+    background: var(--sky);
+}
+.theme-swatch.theme-classic { background: radial-gradient(circle, #1e293b, #0f172a); border-color: #3b82f6; }
+.upgrade-card.theme-card.owned { border-color: var(--accent-primary); box-shadow: 0 0 18px -8px var(--accent-primary); }
+
+/* ================= Singularity ================= */
+/* Pitch black and orange. Behind the cells an accretion disk turns: an orange ring with white line
+   accents, tilted like a disk seen from the side, around a white photon ring. */
+.accretion { display: none; position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+:root[data-theme="singularity"] .accretion { display: block; }
+.accretion .disk {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(90%, 900px);
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%) rotate(-12deg) scaleY(0.42);
+}
+.accretion .disk::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background:
+        repeating-radial-gradient(circle, transparent 0 21px, rgba(255, 255, 255, 0.3) 22px, transparent 23.5px),
+        conic-gradient(#f97316, #7c2d12 12%, #fff 12.4%, #9a3412 13%, #fdba74 26%, #431407 38%, #fff 38.3%, #431407 39%,
+            #fb923c 52%, #1c0a02 63%, #fff 63.3%, #7c2d12 64%, #ea580c 80%, #fed7aa 88%, #fff 88.3%, #c2410c 89%, #f97316);
+    -webkit-mask: radial-gradient(closest-side, transparent 42%, #000 50%, #000 76%, transparent 100%);
+    mask: radial-gradient(closest-side, transparent 42%, #000 50%, #000 76%, transparent 100%);
+    animation: rotate 26s linear infinite;
+    will-change: transform;
+}
+.accretion .disk::after {
+    content: '';
+    position: absolute;
+    inset: 27%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 0 26px 6px rgba(249, 115, 22, 0.55), inset 0 0 26px 4px rgba(249, 115, 22, 0.45);
+}
+@media (prefers-reduced-motion: reduce) {
+    .accretion .disk::before { animation: none; }
+}
+
+/* Every cell glows in its own main color */
+:root[data-theme="singularity"] .cell-glow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 60px 14px var(--main), 0 0 120px 34px color-mix(in srgb, var(--main) 40%, transparent);
+}

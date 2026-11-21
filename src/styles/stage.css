@@ -1,0 +1,224 @@
+.stage-badge {
+    position: absolute;
+    top: 2rem;
+    z-index: 2;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--line);
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(var(--tint), 0.06);
+}
+/* Clickable: opens the stage list. Extra bottom padding makes room for the progress bar. */
+.stage-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.15rem 0.7rem 1.5rem;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+.stage-badge:hover,
+.stage-badge.open { border-color: var(--line-hi); background-color: var(--panel-hover); }
+.stage-badge:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+.badge-chev {
+    width: 12px;
+    height: 12px;
+    fill: none;
+    stroke: var(--text-muted);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.25s ease;
+}
+.stage-badge.open .badge-chev { transform: rotate(180deg); }
+/* Yellow experience bar toward the next stage */
+.stage-xp {
+    position: absolute;
+    left: 1.1rem;
+    right: 1.1rem;
+    bottom: 0.3rem;
+    height: 3px;
+    border-radius: 9999px;
+    background: rgba(var(--tint), 0.1);
+    overflow: hidden;
+}
+.stage-xp > i {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: #FFFF00;
+    box-shadow: 0 0 6px rgba(255, 255, 0, 0.7);
+    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Transcendent Cell: the bar becomes a flowing, star-flecked galaxy */
+.stage-xp.galaxy > i {
+    background:
+        radial-gradient(circle at 12% 50%, #ffffff 0 0.7px, transparent 1.3px) 0 0 / 22px 100%,
+        radial-gradient(circle at 63% 40%, #ffffff 0 0.6px, transparent 1.2px) 0 0 / 31px 100%,
+        linear-gradient(90deg, #4338ca, #a855f7, #ec4899, #22d3ee, #4338ca) 0 0 / 200% 100%;
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.9), 0 0 3px rgba(34, 211, 238, 0.7);
+    animation: galaxyBar 5s linear infinite;
+}
+@keyframes galaxyBar {
+    to { background-position: 22px 0, -31px 0, 200% 0; }
+}
+
+/* Stage list dropdown */
+.stage-menu {
+    position: absolute;
+    top: 5.4rem;
+    left: 50%;
+    margin-left: -160px;
+    z-index: 6; /* above the floating yields canvas (5) */
+    width: 320px;
+    max-height: calc(100% - 7.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 0.4rem;
+    border-radius: 0.85rem;
+    background: var(--bg-dark);
+    border: 1px solid var(--line);
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.85);
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px) scale(0.97);
+    transform-origin: top center;
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.22s;
+}
+.stage-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.18s ease, transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+}
+.stage-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.42rem 0.6rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.si-num { width: 1.4rem; text-align: right; font-variant-numeric: tabular-nums; opacity: 0.8; font-size: 0.75rem; }
+.si-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.si-name { flex: 1; }
+.si-req { font-size: 0.7rem; opacity: 0.75; font-variant-numeric: tabular-nums; }
+.stage-item.done { color: var(--accent-success); }
+.stage-item.current { color: var(--text-main); background: rgba(var(--tint), 0.08); box-shadow: inset 0 0 0 1px rgba(var(--tint), 0.14); }
+.stage-item.future { color: var(--line-hi); cursor: default; }
+.stage-item.future .si-dot { filter: grayscale(1); opacity: 0.5; }
+.stage-item.future .si-name { letter-spacing: 2px; }
+
+/* Reached stages can be opened to read about them */
+.stage-item.done,
+.stage-item.current { cursor: pointer; transition: background-color 0.15s ease; }
+.stage-item.done:hover { background: rgba(16, 185, 129, 0.08); }
+.stage-item.current:hover { background: rgba(var(--tint), 0.12); }
+.stage-item:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: -2px; }
+.si-chev {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.7;
+    transition: transform 0.25s ease;
+}
+.stage-item.future .si-chev { visibility: hidden; }
+.stage-entry.expanded .si-chev { transform: rotate(180deg); }
+.stage-entry.expanded .stage-item { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+/* Smooth open/close of the explainer under a row */
+.stage-info {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stage-entry.expanded .stage-info { grid-template-rows: 1fr; }
+.stage-info-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+.stage-entry.expanded .stage-info-inner {
+    margin: 0 0 0.35rem;
+    padding: 0.55rem 0.7rem 0.6rem 0.8rem;
+    border-left: 3px solid var(--stage-color);
+    border-radius: 0 0 0.5rem 0.5rem;
+    background: rgba(var(--tint), 0.04);
+}
+.stage-info p {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: var(--text-soft);
+    font-weight: 400;
+}
+.stage-info .si-fact {
+    margin-top: 0.45rem;
+    color: var(--text-muted);
+}
+.stage-info .si-fact strong { color: var(--fact); font-weight: 700; }
+
+/* Transcendent Cell: galaxy-tinted name, and a corrupted description with RGB-split glitch slices */
+.stage-entry.galaxy .stage-item.current .si-name {
+    background: linear-gradient(90deg, #c4b5fd, #f0abfc, #67e8f9);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.stage-info p.glitch {
+    position: relative;
+    color: #e9d5ff;
+    line-height: 2.2; /* room for the stacked accent marks above and below each letter */
+    margin: 0.3rem 0;
+    animation: glitchJitter 3.1s steps(1, end) infinite;
+}
+.stage-info p.glitch::before,
+.stage-info p.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    clip-path: inset(0 0 100% 0);
+}
+.stage-info p.glitch::before { color: #22d3ee; animation: glitchSliceA 2.3s steps(1, end) infinite; }
+.stage-info p.glitch::after  { color: #f472b6; animation: glitchSliceB 1.7s steps(1, end) infinite; }
+@keyframes glitchJitter {
+    0%, 90%, 100% { transform: none; filter: none; }
+    91% { transform: translateX(2px) skewX(-5deg); filter: hue-rotate(40deg); }
+    93% { transform: translateX(-2px); }
+    95% { transform: translateX(1px) skewX(4deg); filter: hue-rotate(-50deg); }
+    97% { transform: none; filter: none; }
+}
+@keyframes glitchSliceA {
+    0%   { clip-path: inset(0 0 85% 0);   transform: translateX(-3px); }
+    12%  { clip-path: inset(32% 0 48% 0);  transform: translateX(2px); }
+    24%  { clip-path: inset(72% 0 8% 0);   transform: translateX(-4px); }
+    36%  { clip-path: inset(10% 0 78% 0);  transform: translateX(1px); }
+    48%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+@keyframes glitchSliceB {
+    0%   { clip-path: inset(60% 0 20% 0);  transform: translateX(3px); }
+    15%  { clip-path: inset(5% 0 88% 0);   transform: translateX(-2px); }
+    30%  { clip-path: inset(44% 0 40% 0);  transform: translateX(4px); }
+    42%  { clip-path: inset(86% 0 2% 0);   transform: translateX(-1px); }
+    54%, 100% { clip-path: inset(0 0 100% 0); transform: none; }
+}
+
+.stage-badge.pop { animation: badgePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes badgePop {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.12); border-color: var(--text-muted); box-shadow: 0 0 22px color-mix(in srgb, var(--text-muted) 35%, transparent); }
+    100% { transform: scale(1); }
+}

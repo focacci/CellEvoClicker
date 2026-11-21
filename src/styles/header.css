@@ -1,0 +1,97 @@
+/* ================= Header ================= */
+header {
+    position: relative;
+    z-index: 10;
+    background: linear-gradient(180deg, var(--panel-hi) 0%, var(--panel-bg) 100%);
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* name | (centered currency) | currency */
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.45);
+}
+/* Soft accent line riding on the header border */
+header::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent-primary) 45%, transparent), rgba(191, 64, 191, 0.35), transparent);
+    pointer-events: none;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: linear-gradient(to right, var(--accent-primary), var(--logo-end, #5196b4));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats-container { grid-column: 3; justify-self: end; text-align: right; }
+
+.currency-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1.1rem;
+}
+.currency-divider {
+    width: 1px;
+    height: 1.7rem;
+    background: linear-gradient(transparent, var(--line), transparent);
+}
+
+#dna-counter,
+#rdna-counter {
+    display: inline-block;
+    font-size: 2rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    transform-origin: right center;
+    white-space: nowrap;
+}
+#dna-counter {
+    color: var(--accent-success);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+#rdna-counter {
+    color: var(--rebirth);
+    text-shadow: 0 0 12px rgba(191, 64, 191, 0.3);
+}
+#dps-counter {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+/* DNA currency symbol (replaces the $ sign everywhere) */
+.dna-icon {
+    display: inline-block;
+    height: 0.9em;
+    width: 0.55em;
+    vertical-align: -0.1em;
+    margin-right: 0.12em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    overflow: visible;
+    pointer-events: none;
+}
+.dna-icon .rung { stroke-width: 1.3; opacity: 0.85; }
+/* RNA symbol: bars as bold as the strand, like the reference */
+.rna-icon { width: 0.66em; }
+.rna-icon path { stroke-width: 90; } /* main strand */
+.rna-icon .rung { stroke-width: 78; opacity: 1; }
+
+/* Visual settings */
+.hide-name .logo { visibility: hidden; }
+.hide-earnings #dps-counter { visibility: hidden; }
+.center-currency .stats-container { grid-column: 2; justify-self: center; text-align: center; }
+.center-currency .currency-row { justify-content: center; }
+.center-currency #dna-counter,
+.center-currency #rdna-counter { transform-origin: center; }
