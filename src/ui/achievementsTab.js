@@ -1,6 +1,7 @@
 // Achievements tab: every achievement by tier, with a progress bar until it is earned
 import { el, setText, setStyle } from './dom.js'
 import { ACHIEVEMENTS } from '../data/achievements.js'
+import { THEMES } from '../data/themes.js'
 import { measure } from '../achievements.js'
 import { game } from '../state.js'
 
@@ -14,8 +15,10 @@ const rows = {}
 for (const tier in TIERS) {
   achievementsTab.appendChild(el('h4', 'ach-tier', TIERS[tier]))
   for (const a of ACHIEVEMENTS.filter(a => a.tier === tier)) {
+    const theme = THEMES.find(t => t.achievement === a.id)
+    const reward = theme ? `<div class="ach-reward">Unlocks the ${theme.name} theme</div>` : ''
     const row = achievementsTab.appendChild(el('div', 'ach tier-' + tier, STAR +
-      `<div class="ach-info"><div class="ach-name">${a.name}</div><div class="ach-desc">${a.desc}</div><div class="ach-bar"><i></i></div></div>`))
+      `<div class="ach-info"><div class="ach-name">${a.name}</div><div class="ach-desc">${a.desc}</div>${reward}<div class="ach-bar"><i></i></div></div>`))
     rows[a.id] = { row, bar: row.querySelector('.ach-bar > i') }
   }
 }

@@ -26,7 +26,7 @@
     border-bottom: 1px solid var(--border);
     letter-spacing: 0.5px;
     text-align: center;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent);
+    background: linear-gradient(180deg, rgba(var(--tint), 0.025), transparent);
     transition: color 0.3s ease, text-shadow 0.3s ease, filter 0.45s ease, opacity 0.45s ease;
 }
 /* ‹ Mutations › switcher */
@@ -44,13 +44,13 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1px solid rgba(148, 163, 184, 0.28);
+    border: 1px solid color-mix(in srgb, var(--text-muted) 28%, transparent);
     background: transparent;
     color: var(--text-muted);
     cursor: pointer;
     transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
 }
-.tab-arrow:hover { color: var(--text-main); border-color: rgba(96, 165, 250, 0.65); background: rgba(37, 99, 235, 0.15); }
+.tab-arrow:hover { color: var(--text-main); border-color: color-mix(in srgb, var(--accent-primary) 65%, transparent); background: color-mix(in srgb, var(--accent-deep) 15%, transparent); }
 .tab-arrow:active { transform: scale(0.92); }
 .tab-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .pane-title.no-arrows .tab-arrow { visibility: hidden; }
@@ -66,12 +66,12 @@
     overscroll-behavior: contain;
     padding: 1rem;
     scrollbar-width: thin;
-    scrollbar-color: #475569 transparent;
+    scrollbar-color: var(--line) transparent;
 }
 .upgrades-list::-webkit-scrollbar { width: 8px; }
 .upgrades-list::-webkit-scrollbar-track { background: transparent; }
 .upgrades-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 9999px; }
-.upgrades-list::-webkit-scrollbar-thumb:hover { background: #475569; }
+.upgrades-list::-webkit-scrollbar-thumb:hover { background: var(--line); }
 
 .upgrade-group { display: none; }
 .upgrade-group.active { display: block; animation: groupIn 0.35s ease; }
@@ -81,7 +81,7 @@
 }
 
 .upgrade-card {
-    background: linear-gradient(180deg, #111b31 0%, #0f172a 100%);
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-dark) 100%);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
     padding: 1rem;
@@ -92,22 +92,22 @@
     transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 .upgrade-card:hover {
-    border-color: #475569;
+    border-color: var(--line);
     transform: translateY(-1px);
     box-shadow: 0 8px 20px -12px rgba(0, 0, 0, 0.8);
 }
-.upgrade-card.affordable { border-color: rgba(59, 130, 246, 0.42); }
-.upgrade-card.affordable:hover { border-color: rgba(96, 165, 250, 0.7); }
+.upgrade-card.affordable { border-color: color-mix(in srgb, var(--accent-primary) 42%, transparent); }
+.upgrade-card.affordable:hover { border-color: color-mix(in srgb, var(--accent-primary) 70%, transparent); }
 .upgrade-card.reveal { animation: cardReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
 .upgrade-card.bought { animation: cardBought 0.42s ease; }
 @keyframes cardReveal {
-    0%   { opacity: 0; transform: translateY(14px) scale(0.97); border-color: rgba(96, 165, 250, 0.9); box-shadow: 0 0 0 rgba(59, 130, 246, 0); }
-    60%  { opacity: 1; box-shadow: 0 0 26px -4px rgba(59, 130, 246, 0.55); }
+    0%   { opacity: 0; transform: translateY(14px) scale(0.97); border-color: color-mix(in srgb, var(--accent-primary) 90%, transparent); box-shadow: 0 0 0 transparent; }
+    60%  { opacity: 1; box-shadow: 0 0 26px -4px color-mix(in srgb, var(--accent-primary) 55%, transparent); }
     100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes cardBought {
     0%   { transform: scale(1); }
-    35%  { transform: scale(0.985); box-shadow: 0 0 22px -6px rgba(59, 130, 246, 0.6); }
+    35%  { transform: scale(0.985); box-shadow: 0 0 22px -6px color-mix(in srgb, var(--accent-primary) 60%, transparent); }
     100% { transform: scale(1); }
 }
 
@@ -148,8 +148,8 @@
 
 .upgrade-btn {
     --p: 0%;
-    background: linear-gradient(180deg, #3b82f6 0%, #2f6fe8 100%);
-    color: white;
+    background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-deep) 100%);
+    color: var(--on-accent);
     border: none;
     padding: 0.75rem 1.2rem;
     border-radius: 0.5rem;
@@ -159,17 +159,17 @@
     text-align: center;
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 10px -3px rgba(37, 99, 235, 0.6);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 2px 10px -3px color-mix(in srgb, var(--accent-deep) 60%, transparent);
     transition: background-color 0.2s, opacity 0.2s, transform 0.12s ease, box-shadow 0.2s, filter 0.2s;
 }
 .upgrade-btn:hover:not(:disabled) {
     filter: brightness(1.1);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 4px 14px -3px rgba(37, 99, 235, 0.75);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 4px 14px -3px color-mix(in srgb, var(--accent-deep) 75%, transparent);
 }
 .upgrade-btn:active:not(:disabled) { transform: scale(0.95); }
 /* Unaffordable: grey, with a quiet fill showing how close you are */
 .upgrade-btn:disabled {
-    background: linear-gradient(90deg, rgba(59, 130, 246, 0.28) 0%, rgba(59, 130, 246, 0.28) var(--p), #334155 var(--p), #334155 100%);
+    background: linear-gradient(90deg, color-mix(in srgb, var(--accent-primary) 28%, transparent) 0%, color-mix(in srgb, var(--accent-primary) 28%, transparent) var(--p), var(--border) var(--p), var(--border) 100%);
     color: var(--text-muted);
     cursor: not-allowed;
     box-shadow: none;
@@ -178,18 +178,18 @@
 /* Next mutation teaser */
 .upgrade-card.teaser {
     border-style: dashed;
-    background: rgba(15, 23, 42, 0.55);
+    background: color-mix(in srgb, var(--bg-dark) 55%, transparent);
     justify-content: flex-start;
     gap: 0.9rem;
 }
 .upgrade-card.teaser:hover { transform: none; box-shadow: none; border-color: var(--border); }
 .teaser .upgrade-name { color: var(--text-muted); }
 .teaser .upgrade-desc { margin-bottom: 0; }
-.teaser-icon { width: 34px; height: 38px; color: #475569; flex-shrink: 0; overflow: visible; }
+.teaser-icon { width: 34px; height: 38px; color: var(--line); flex-shrink: 0; overflow: visible; }
 .teaser-bar {
     height: 5px;
     border-radius: 9999px;
-    background: #1e293b;
+    background: rgba(var(--tint), 0.08);
     overflow: hidden;
     margin-top: 0.55rem;
 }
@@ -293,7 +293,7 @@
 
 /* Stats tab */
 .stat-group {
-    background: linear-gradient(180deg, #111b31 0%, #0f172a 100%);
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-dark) 100%);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
     padding: 0.8rem 1rem;
@@ -348,12 +348,13 @@
     margin-bottom: 0.6rem;
     border: 1px solid var(--border);
     border-radius: 0.75rem;
-    background: linear-gradient(180deg, #111b31 0%, #0f172a 100%);
+    background: linear-gradient(180deg, var(--card-bg) 0%, var(--bg-dark) 100%);
 }
-.ach-star { width: 28px; height: 28px; flex-shrink: 0; fill: #334155; transition: fill 0.3s; }
+.ach-star { width: 28px; height: 28px; flex-shrink: 0; fill: var(--border); transition: fill 0.3s; }
 .ach-info { flex: 1; }
 .ach-name { font-weight: 600; color: var(--text-muted); }
 .ach-desc { font-size: 0.8rem; color: var(--text-muted); }
+.ach-reward { font-size: 0.72rem; font-weight: 600; color: var(--accent-primary); margin-top: 0.15rem; }
 .ach-bar { height: 4px; margin-top: 0.45rem; border-radius: 9999px; background: var(--border); overflow: hidden; }
 .ach-bar > i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--accent-primary); transition: width 0.35s ease; }
 .ach.done { border-color: rgba(250, 204, 21, 0.45); }

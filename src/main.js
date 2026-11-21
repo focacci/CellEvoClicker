@@ -6,12 +6,14 @@ import './styles/stage.css'
 import './styles/cells.css'
 import './styles/panel.css'
 import './styles/popups.css'
+import './styles/themes.css'
 import { game } from './state.js'
 import { loadGame, cleanSave, saveGame } from './save.js'
 import { autoTick, collectOffline, addPlayTime } from './actions.js'
 import { long } from './format.js'
 import { renderHeader } from './ui/header.js'
 import { renderPanel } from './ui/panel.js'
+import { renderWornTheme } from './ui/themesTab.js'
 import { checkAwards } from './ui/awards.js'
 import { renderRebirthButton } from './ui/rebirthButton.js'
 import { DNA_ICON } from './ui/icons.js'
@@ -48,6 +50,7 @@ function tick(now) {
 }
 
 function render(now, dt) {
+  renderWornTheme()
   renderSlide(now)
   renderHeader(game, dt)
   renderScreens(dt)

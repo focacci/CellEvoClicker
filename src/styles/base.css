@@ -1,18 +1,67 @@
 :root {
-    --bg-dark: #0f172a;
-    --panel-bg: #1e293b;
+    /* Surfaces and text. Classic in dark mode keeps v0.3.5's exact colors. */
+    color-scheme: dark;
+    --bg-dark: #0f172a;       /* the page and the deepest surfaces */
+    --panel-bg: #1e293b;      /* header, side panel, badges */
+    --panel-hi: #212d42;      /* top of the header and pop-up gradients */
+    --panel-hover: #26334a;
+    --card-bg: #111b31;       /* top of the card gradient */
     --border: #334155;
+    --line: #475569;          /* stronger outlines */
+    --line-hi: #64748b;       /* hover outlines and quiet text */
+    --tint: 255, 255, 255;    /* soft overlays: light on dark, dark on light */
+    --text-main: #f8fafc;
+    --text-soft: #cbd5e1;
+    --text-muted: #94a3b8;
+    --fact: #FFFF00;          /* "Did you know?" */
+    --sky: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); /* behind the cells */
+
+    /* Accent (themes change it). DNA and RNA colors never change. */
     --accent-primary: #3b82f6;
+    --accent-deep: #2f6fe8;
+    --on-accent: #ffffff;     /* text on accent buttons */
     --accent-success: #10b981;
     --accent-purple: #8b5cf6;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
 
     /* Rebirth palette */
     --rebirth: #BF40BF;
     --rebirth-border: #9932cc;
     --rebirth-bg: #15011a;
     --rebirth-text: #e7c6ff;
+}
+
+/* Classic follows the device: a light version when the system is in light mode */
+@media (prefers-color-scheme: light) {
+    :root[data-theme="classic"] {
+        color-scheme: light;
+        --bg-dark: #eef2f7;
+        --panel-bg: #ffffff;
+        --panel-hi: #ffffff;
+        --panel-hover: #f1f5f9;
+        --card-bg: #f8fafc;
+        --border: #d5dde8;
+        --line: #b6c2d2;
+        --line-hi: #8291a7;
+        --tint: 15, 23, 42;
+        --text-main: #0f172a;
+        --text-soft: #334155;
+        --text-muted: #5b6b82;
+        --fact: #b45309;
+        --sky: radial-gradient(circle at center, #f8fbff 0%, #dde6f1 100%);
+    }
+}
+
+/* Other themes set --bg-dark, --panel-bg, --border, --accent-primary, --on-accent (and maybe --sky)
+   from themes.js. The in-between shades are mixed from those. */
+:root:not([data-theme="classic"]) {
+    --panel-hi: color-mix(in srgb, var(--panel-bg) 94%, white);
+    --panel-hover: color-mix(in srgb, var(--panel-bg) 88%, white);
+    --card-bg: color-mix(in srgb, var(--panel-bg) 45%, var(--bg-dark));
+    --line: color-mix(in srgb, var(--border) 80%, white);
+    --line-hi: color-mix(in srgb, var(--border) 60%, white);
+    --accent-deep: color-mix(in srgb, var(--accent-primary) 85%, black);
+    --sky: radial-gradient(circle at center, var(--panel-bg) 0%, var(--bg-dark) 100%);
+    --logo-end: color-mix(in srgb, var(--accent-primary) 55%, white);
 }
 
 * {
@@ -58,8 +107,8 @@ button { -webkit-tap-highlight-color: transparent; }
     pointer-events: none;
 }
 .toast {
-    background: rgba(15, 23, 42, 0.95);
-    border: 1px solid #475569;
+    background: color-mix(in srgb, var(--bg-dark) 95%, transparent);
+    border: 1px solid var(--line);
     color: var(--text-main);
     padding: 0.65rem 1.2rem;
     border-radius: 0.75rem;

@@ -3,14 +3,16 @@ import { $, setText } from './dom.js'
 import { mutationsTab, renderMutations } from './mutationsTab.js'
 import { rebirthTab, renderRebirthTab } from './rebirthTab.js'
 import { achievementsTab, renderAchievements } from './achievementsTab.js'
+import { themesTab, renderThemes } from './themesTab.js'
 import { statsTab, renderStats } from './statsTab.js'
 import { game } from '../state.js'
 
-const TABS = ['mutations', 'achievements', 'stats']
+const TABS = ['mutations', 'achievements', 'themes', 'stats']
 const PAGES = {
   mutations: { title: 'Mutations', el: mutationsTab, render: () => renderMutations(game.view) },
   rebirth: { title: 'Rebirth Mutations', el: rebirthTab, render: renderRebirthTab },
   achievements: { title: 'Achievements', el: achievementsTab, render: renderAchievements },
+  themes: { title: 'Themes', el: themesTab, render: renderThemes },
   stats: { title: 'Stats', el: statsTab, render: renderStats }
 }
 const panel = $('#upgrades-pane'), list = $('#upgrades-container'), title = $('#pane-title')

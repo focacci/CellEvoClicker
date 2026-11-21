@@ -2,14 +2,14 @@
     position: absolute;
     top: 2rem;
     z-index: 2;
-    background-color: #1e293b;
-    border: 1px solid #475569;
+    background-color: var(--panel-bg);
+    border: 1px solid var(--line);
     padding: 0.5rem 1.5rem;
     border-radius: 9999px;
     font-weight: 600;
     letter-spacing: 0.5px;
     white-space: nowrap;
-    box-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    box-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(var(--tint), 0.06);
 }
 /* Clickable: opens the stage list. Extra bottom padding makes room for the progress bar. */
 .stage-badge {
@@ -22,7 +22,7 @@
     transition: border-color 0.2s, background-color 0.2s;
 }
 .stage-badge:hover,
-.stage-badge.open { border-color: #64748b; background-color: #26334a; }
+.stage-badge.open { border-color: var(--line-hi); background-color: var(--panel-hover); }
 .stage-badge:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
 .badge-chev {
     width: 12px;
@@ -43,7 +43,7 @@
     bottom: 0.3rem;
     height: 3px;
     border-radius: 9999px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(var(--tint), 0.1);
     overflow: hidden;
 }
 .stage-xp > i {
@@ -81,11 +81,11 @@
     overscroll-behavior: contain;
     padding: 0.4rem;
     border-radius: 0.85rem;
-    background: #0f172a;
-    border: 1px solid #475569;
+    background: var(--bg-dark);
+    border: 1px solid var(--line);
     box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.85);
     scrollbar-width: thin;
-    scrollbar-color: #475569 transparent;
+    scrollbar-color: var(--line) transparent;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-6px) scale(0.97);
@@ -112,8 +112,8 @@
 .si-name { flex: 1; }
 .si-req { font-size: 0.7rem; opacity: 0.75; font-variant-numeric: tabular-nums; }
 .stage-item.done { color: var(--accent-success); }
-.stage-item.current { color: #ffffff; background: rgba(255, 255, 255, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14); }
-.stage-item.future { color: #64748b; cursor: default; }
+.stage-item.current { color: var(--text-main); background: rgba(var(--tint), 0.08); box-shadow: inset 0 0 0 1px rgba(var(--tint), 0.14); }
+.stage-item.future { color: var(--line-hi); cursor: default; }
 .stage-item.future .si-dot { filter: grayscale(1); opacity: 0.5; }
 .stage-item.future .si-name { letter-spacing: 2px; }
 
@@ -121,7 +121,7 @@
 .stage-item.done,
 .stage-item.current { cursor: pointer; transition: background-color 0.15s ease; }
 .stage-item.done:hover { background: rgba(16, 185, 129, 0.08); }
-.stage-item.current:hover { background: rgba(255, 255, 255, 0.12); }
+.stage-item.current:hover { background: rgba(var(--tint), 0.12); }
 .stage-item:focus-visible { outline: 2px solid var(--accent-primary); outline-offset: -2px; }
 .si-chev {
     width: 10px;
@@ -155,19 +155,19 @@
     padding: 0.55rem 0.7rem 0.6rem 0.8rem;
     border-left: 3px solid var(--stage-color);
     border-radius: 0 0 0.5rem 0.5rem;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(var(--tint), 0.04);
 }
 .stage-info p {
     font-size: 0.78rem;
     line-height: 1.45;
-    color: #cbd5e1;
+    color: var(--text-soft);
     font-weight: 400;
 }
 .stage-info .si-fact {
     margin-top: 0.45rem;
-    color: #94a3b8;
+    color: var(--text-muted);
 }
-.stage-info .si-fact strong { color: #FFFF00; font-weight: 700; }
+.stage-info .si-fact strong { color: var(--fact); font-weight: 700; }
 
 /* Transcendent Cell: galaxy-tinted name, and a corrupted description with RGB-split glitch slices */
 .stage-entry.galaxy .stage-item.current .si-name {
@@ -219,6 +219,6 @@
 .stage-badge.pop { animation: badgePop 0.65s cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes badgePop {
     0%   { transform: scale(1); }
-    30%  { transform: scale(1.12); border-color: #94a3b8; box-shadow: 0 0 22px rgba(148, 163, 184, 0.35); }
+    30%  { transform: scale(1.12); border-color: var(--text-muted); box-shadow: 0 0 22px color-mix(in srgb, var(--text-muted) 35%, transparent); }
     100% { transform: scale(1); }
 }
