@@ -19,4 +19,4 @@ export const TEASER_LOCK = '<svg class="teaser-icon" viewBox="0 0 64 72" aria-hi
   '<path d="M18 33 V22 a14 14 0 0 1 28 0 V33" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round"/>' +
   '<rect x="7" y="31" width="50" height="39" rx="9" fill="currentColor"/></svg>'
 
-export const CHEVRON = '<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 L6 7.5 L9 4.5"/></svg>'
+export const chevron = (cls) => `<svg class="${cls}" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5 L6 7.5 L9 4.5"/></svg>`

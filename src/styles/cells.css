@@ -140,6 +140,14 @@
     opacity: 0;
     transition: opacity 0.5s, width 0.5s, height 0.5s, top 0.5s, left 0.5s, border-radius 0.5s;
 }
+.nucleolus {
+    position: absolute;
+    border-radius: 50%;
+    background: #881337;
+    opacity: 0.75;
+    box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.5);
+}
+.nucleus-core { position: absolute; inset: 30%; border-radius: 50%; }
 .chromatin {
     position: absolute;
     border-radius: 50%;

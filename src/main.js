@@ -13,6 +13,7 @@ import { $ } from './ui/dom.js'
 import { renderHeader } from './ui/header.js'
 import { mutationsTab, renderMutations } from './ui/mutationsTab.js'
 import { toast } from './ui/toast.js'
+import { renderScreens } from './ui/screens.js'
 import './ui/clicks.js'
 
 const saved = await loadGame()
@@ -20,6 +21,7 @@ if (saved) {
   Object.assign(game, cleanSave(saved))
   toast('Welcome back! Your progress was restored.')
 }
+if (import.meta.env.DEV) window.game = game // set levels from the console to try out stages
 $('#upgrades-container').appendChild(mutationsTab)
 mutationsTab.classList.add('active')
 
@@ -29,6 +31,7 @@ function tick(now) {
 
 function render(now, dt) {
   renderHeader(game, dt)
+  renderScreens()
   renderMutations(game.view)
 }
 

@@ -1,17 +1,37 @@
-// One screen per colony, holding its stage badge and its cells
+// One screen per colony: its stage badge and its cell mass. renderScreens() keeps them matching the game.
 import { $, el } from './dom.js'
+import { measurePane } from './pane.js'
+import { makeBadge, renderBadge } from './stageBadge.js'
+import { toggleStageList, renderStageList } from './stageList.js'
+import { buildMass, syncMass, layout } from '../cells/mass.js'
 import { COLONIES } from '../data/colonies.js'
+import { cellCount, stageOf } from '../rules.js'
+import { game } from '../state.js'
 
 const track = $('#screen-track')
 
 export const views = COLONIES.slice(0, 1).map((c, i) => {
-  const screen = el('section', 'screen')
-  const content = el('div', 'screen-content', '<div class="stage-badge"><span class="badge-label">Stage 1: Procaryotic Sphere</span></div>')
-  const area = el('div', 'cell-container')
-  const mass = el('div', 'cell-mass', '<div class="cell-sphere" style="position:absolute;left:-100px;top:-100px"></div>')
-  area.appendChild(mass)
-  content.appendChild(area)
+  const screen = el('section', 'screen'), content = el('div', 'screen-content'), area = el('div', 'cell-container')
+  const v = { i, screen, content, ...buildMass(area) }
+  v.badge = makeBadge(() => toggleStageList(v))
+  content.append(v.badge, area)
   screen.appendChild(content)
   track.appendChild(screen)
-  return { i, screen, area, mass }
+  return v
+})
+
+export function renderScreens() {
+  for (const v of views) {
+    syncMass(v, cellCount(game, v.i), stageOf(game, v.i))
+    renderBadge(v)
+  }
+  renderStageList()
+}
+
+addEventListener('resize', () => {
+  measurePane()
+  for (const v of views) {
+    v.badgeBox = null
+    layout(v)
+  }
 })
