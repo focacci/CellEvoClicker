@@ -3,10 +3,11 @@ import { $, el } from './dom.js'
 import { measurePane } from './pane.js'
 import { makeBadge, renderBadge } from './stageBadge.js'
 import { toggleStageList, renderStageList } from './stageList.js'
-import { buildMass, syncMass, layout } from '../cells/mass.js'
+import { buildMass, syncMass, spinMass, layout } from '../cells/mass.js'
 import { COLONIES } from '../data/colonies.js'
 import { cellCount, stageOf } from '../rules.js'
 import { game } from '../state.js'
+import { settings } from '../settings.js'
 
 const track = $('#screen-track')
 
@@ -21,10 +22,11 @@ export const views = COLONIES.map((c, i) => {
   return v
 })
 
-export function renderScreens() {
+export function renderScreens(dt) {
   views[0].screen.classList.toggle('dormant', game.pending) // greyed out after a rebirth, until clicked
   for (const v of views) {
     syncMass(v, cellCount(game, v.i), stageOf(game, v.i))
+    if (!v.paused) spinMass(v, dt, settings.slowRotate)
     renderBadge(v)
   }
   renderStageList()

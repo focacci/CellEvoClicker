@@ -10,13 +10,27 @@ import { playClick } from '../audio/sfx.js'
 import { views } from './screens.js'
 import { pane } from './pane.js'
 import { pop } from './header.js'
+import { modalOpen } from './modal.js'
 import { spawnRing } from '../cells/junctions.js'
 import { saveGame } from '../save.js'
 
+const pressSound = (v) => { if (game.colonies[v.i].unlocked || game.pending) playClick() }
+
 for (const v of views) {
-  v.area.addEventListener('pointerdown', () => { if (game.colonies[v.i].unlocked || game.pending) playClick() })
+  v.area.addEventListener('pointerdown', () => pressSound(v))
   v.area.addEventListener('click', (e) => clickColony(v, e.clientX - pane.left, e.clientY - pane.top))
 }
+
+// Space clicks the cell: one click per press (holding it down doesn't repeat) and the page doesn't scroll.
+// Space on a focused button, switch, slider or stage badge still works the normal way.
+addEventListener('keydown', (e) => {
+  if (e.code !== 'Space' || modalOpen() || e.target.closest('button, input, select, textarea, a, [role=button]')) return
+  e.preventDefault()
+  if (e.repeat) return
+  const v = views[game.view], p = cellPoint(v, v.cells[0])
+  pressSound(v)
+  clickColony(v, p.x, p.y)
+})
 
 // x, y: where the click landed on the pane
 export function clickColony(v, x, y) {
@@ -40,10 +54,12 @@ function wakeUp(v) {
   saveGame(game)
 }
 
-// Auto clicks on the colony on screen float up in red (orange for crits). Not while catching up.
+// Auto clicks on the colony on screen float up in red (orange for crits, which also pop the DNA counter).
+// Not while catching up after the tab was hidden.
 export function showAutoTick(i, hit) {
   if (!hit || hit.ticks > 5 || game.view !== i || document.hidden || pane.sliding) return
   showYield(views[i], hit.perCell, hit.crit ? COLORS.autoCrit : COLORS.auto)
+  if (hit.crit) pop()
 }
 
 // What ONE cell made floats up over every cell (over the click point for the clicked one)

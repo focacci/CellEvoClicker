@@ -76,47 +76,58 @@
 
     <div id="toast-stack"></div>
 
-    <!-- Reset confirmation (opened with Esc) -->
+    <!-- Settings, opened with the gear button -->
+    <button id="settings-btn" type="button" aria-label="Settings" title="Settings" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18.04 7.38L20.91 6.63L22.1 9.5L19.53 10.99A7.6 7.6 0 0 1 19.53 13.01L22.1 14.5L20.91 17.37L18.04 16.62A7.6 7.6 0 0 1 16.62 18.04L17.37 20.91L14.5 22.1L13.01 19.53A7.6 7.6 0 0 1 10.99 19.53L9.5 22.1L6.63 20.91L7.38 18.04A7.6 7.6 0 0 1 5.96 16.62L3.09 17.37L1.9 14.5L4.47 13.01A7.6 7.6 0 0 1 4.47 10.99L1.9 9.5L3.09 6.63L5.96 7.38A7.6 7.6 0 0 1 7.38 5.96L6.63 3.09L9.5 1.9L10.99 4.47A7.6 7.6 0 0 1 13.01 4.47L14.5 1.9L17.37 3.09L16.62 5.96A7.6 7.6 0 0 1 18.04 7.38Z"/>
+            <circle cx="12" cy="12" r="3"/>
+        </svg>
+    </button>
+
+    <div class="modal-backdrop" id="settings-modal" hidden>
+        <div class="modal settings" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+            <button type="button" class="modal-close" aria-label="Close settings">&times;</button>
+            <h2 id="settings-title">Settings</h2>
+            <section>
+                <h3>Sound</h3>
+                <label class="vol-row">
+                    <span class="vol-label">🎵 Music <small>0% turns it off</small></span>
+                    <span class="vol-value" id="vol-music-val">100%</span>
+                    <input type="range" id="vol-music" min="0" max="150" step="5">
+                </label>
+                <label class="vol-row">
+                    <span class="vol-label">🔊 Effects <small>clicks &amp; purchases</small></span>
+                    <span class="vol-value" id="vol-sfx-val">100%</span>
+                    <input type="range" id="vol-sfx" min="0" max="150" step="5">
+                </label>
+            </section>
+            <section>
+                <h3>Visual</h3>
+                <label class="toggle"><span>Hide game name</span><input type="checkbox" data-setting="hideName"></label>
+                <label class="toggle"><span>Hide DNA earnings <small>Generation Rate and +DNA pop-ups</small></span><input type="checkbox" data-setting="hideEarnings"></label>
+                <label class="toggle"><span>Currency in the center</span><input type="checkbox" data-setting="centerCurrency"></label>
+                <label class="toggle"><span>Slow cell rotation</span><input type="checkbox" data-setting="slowRotate"></label>
+            </section>
+            <section>
+                <h3>Game</h3>
+                <button type="button" class="modal-btn danger" id="reset-open">Reset game…</button>
+            </section>
+        </div>
+    </div>
+
+    <!-- Reset confirmation, opened from Settings -->
     <div class="modal-backdrop" id="reset-modal" hidden>
         <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="reset-title" aria-describedby="reset-desc">
             <div class="modal-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M12 3 L22 20 H2 Z"/><path class="mark" d="M12 9.5 V14 M12 17 V17.2"/></svg>
             </div>
             <h2 id="reset-title">Reset all progress?</h2>
-            <p id="reset-desc">This erases your DNA, RNA, mutations, colonies and rebirth mutations, and starts a brand new game. It can't be undone.</p>
+            <p id="reset-desc">This erases your DNA, RNA, mutations, colonies, rebirth mutations, achievements, themes and time played, and starts a brand new game. Your sound and visual settings stay. It can't be undone.</p>
             <div class="modal-actions">
                 <button type="button" class="modal-btn" id="reset-cancel">Cancel</button>
                 <button type="button" class="modal-btn danger" id="reset-confirm">Reset game</button>
             </div>
-            <div class="modal-hint">Press <kbd>Esc</kbd> to cancel · the game keeps running</div>
         </div>
-    </div>
-
-    <!-- Volume controls -->
-    <div id="sound-dock">
-      <div id="volume-wrap">
-        <button id="volume-btn" type="button" aria-label="Volume" aria-expanded="false" aria-controls="volume-panel" title="Volume">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path class="vol-speaker" d="M4 9.5 H7.5 L12 5.5 V18.5 L7.5 14.5 H4 Z"/>
-            <path class="vol-wave1" d="M15.2 9.2 C16.4 10.6 16.4 13.4 15.2 14.8"/>
-            <path class="vol-wave2" d="M17.8 6.8 C20.4 9.6 20.4 14.4 17.8 17.2"/>
-            <path class="vol-mute" d="M15.5 9.5 L20.5 14.5 M20.5 9.5 L15.5 14.5"/>
-          </svg>
-        </button>
-        <div id="volume-panel" role="dialog" aria-label="Volume">
-          <div class="vol-title">Volume</div>
-          <label class="vol-row">
-            <span class="vol-label">🎵 Music</span>
-            <span class="vol-value" id="vol-music-val">100%</span>
-            <input type="range" id="vol-music" min="0" max="150" step="5" value="100">
-          </label>
-          <label class="vol-row">
-            <span class="vol-label">🔊 Effects <small>clicks &amp; purchases</small></span>
-            <span class="vol-value" id="vol-sfx-val">100%</span>
-            <input type="range" id="vol-sfx" min="0" max="150" step="5" value="100">
-          </label>
-        </div>
-      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>

@@ -23,6 +23,7 @@ import { renderAmbient } from './fx/ambient.js'
 import { renderFx } from './fx/effects.js'
 import { syncMusic } from './audio/music.js'
 import './ui/settingsMenu.js'
+import './ui/resetModal.js'
 
 const saved = await loadGame()
 if (saved) welcomeBack(saved)
@@ -44,7 +45,7 @@ function tick(now) {
 function render(now, dt) {
   renderSlide(now)
   renderHeader(game, dt)
-  renderScreens()
+  renderScreens(dt)
   renderLocks()
   renderPanel()
   renderRebirthButton(now)

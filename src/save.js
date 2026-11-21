@@ -61,9 +61,11 @@ export function readOldBackup() {
     req.onupgradeneeded = () => req.transaction.abort() // no old copy: don't create one
     req.onerror = () => resolve(null)
     req.onsuccess = () => {
-      const get = req.result.transaction('save').objectStore('save').get(SAVE_KEY)
-      get.onsuccess = () => resolve(get.result ?? null)
-      get.onerror = () => resolve(null)
+      const db = req.result, get = db.transaction('save').objectStore('save').get(SAVE_KEY)
+      get.onsuccess = get.onerror = () => {
+        db.close()
+        resolve(get.result ?? null)
+      }
     }
   })
 }
@@ -76,5 +78,9 @@ export async function loadGame() {
 export function wipeSave() {
   blocked = true
   storage?.removeItem(SAVE_KEY)
-  if (typeof indexedDB !== 'undefined') indexedDB.deleteDatabase('cellEvoClicker')
+  return new Promise(resolve => {
+    if (typeof indexedDB === 'undefined') return resolve()
+    const req = indexedDB.deleteDatabase('cellEvoClicker')
+    req.onsuccess = req.onerror = req.onblocked = () => resolve()
+  })
 }

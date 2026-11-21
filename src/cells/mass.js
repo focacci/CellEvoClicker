@@ -21,10 +21,19 @@ const HEX_SLOTS = (() => {
 })()
 
 export function buildMass(area) {
-  const mass = el('div', 'cell-mass')
-  const layer = (name) => mass.appendChild(el('div', 'mass-layer layer-' + name))
+  const mass = el('div', 'cell-mass'), spin = mass.appendChild(el('div', 'mass-spin'))
+  const layer = (name) => spin.appendChild(el('div', 'mass-layer layer-' + name))
   area.appendChild(mass)
-  return { area, mass, features: layer('features'), bodies: layer('bodies'), junctions: layer('junctions'), fx: layer('fx'), cells: [], stage: -1, scale: 1 }
+  return { area, mass, spin, angle: 0, features: layer('features'), bodies: layer('bodies'), junctions: layer('junctions'), fx: layer('fx'), cells: [], stage: -1, scale: 1 }
+}
+
+// Slow cell rotation (a visual setting): the whole mass turns once every 3 minutes.
+// Switching it off sets the mass upright again.
+export function spinMass(v, dt, on) {
+  const angle = on ? (v.angle + dt * 2) % 360 : 0
+  if (angle === v.angle) return
+  v.angle = angle
+  v.spin.style.transform = `rotate(${angle.toFixed(2)}deg)`
 }
 
 // Makes the cells match the game: how many there are and which stage they show.
@@ -131,9 +140,10 @@ function featureAngle(c, st) {
   return (c.index * 137.508) % 360
 }
 
-// Where a cell sits on the pane, in px
+// Where a cell sits on the pane, in px (turned with the mass)
 export function cellPoint(v, c) {
-  return { x: pane.w / 2 + c.x * v.scale, y: pane.h / 2 + c.y * v.scale }
+  const a = v.angle * Math.PI / 180, cos = Math.cos(a), sin = Math.sin(a)
+  return { x: pane.w / 2 + (c.x * cos - c.y * sin) * v.scale, y: pane.h / 2 + (c.x * sin + c.y * cos) * v.scale }
 }
 
 export function nearestCell(v, x, y) {

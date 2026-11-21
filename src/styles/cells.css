@@ -24,7 +24,9 @@
 .cell-mass.cooldown { filter: saturate(0.5) brightness(0.7); }
 .no-anim, .no-anim * { transition: none !important; }
 
-.mass-layer { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.mass-layer,
+.mass-spin { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.mass-spin { will-change: transform; } /* turned every frame by the slow rotation setting */
 .layer-features { z-index: 1; pointer-events: none; }
 .layer-bodies { z-index: 2; }
 .layer-junctions { z-index: 3; pointer-events: none; }

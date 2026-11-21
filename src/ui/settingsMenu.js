@@ -1,12 +1,16 @@
-// Settings: the Sound section (Music and Effects volume sliders)
+// The Settings pop-up: Sound (volume sliders), Visual (on/off switches) and Game (Reset)
 import { $ } from './dom.js'
+import { openModal, closeModal } from './modal.js'
 import { settings, saveSettings } from '../settings.js'
 import { syncMusic } from '../audio/music.js'
 import { setSfxVolume, playClick } from '../audio/sfx.js'
 
-const button = $('#volume-btn'), panel = $('#volume-panel'), wrap = $('#volume-wrap')
+const modal = $('#settings-modal')
+$('#settings-btn').addEventListener('click', () => openModal(modal))
+modal.querySelector('.modal-close').addEventListener('click', () => closeModal(modal))
+$('#reset-open').addEventListener('click', () => openModal($('#reset-modal')))
 
-// Shows a volume on its slider: position, % label and the colored fill
+// Sound: shows a volume on its slider (position, % label and the colored fill)
 function paintSlider(k) {
   const pct = Math.round(settings[k] * 100), slider = $('#vol-' + k)
   slider.value = pct
@@ -26,10 +30,21 @@ for (const k of ['music', 'sfx']) {
 }
 $('#vol-sfx').addEventListener('change', playClick) // hear the new effects level on release
 
-function setOpen(open) {
-  panel.classList.toggle('open', open)
-  button.setAttribute('aria-expanded', open)
+// Visual: each switch turns a class on the page on or off.
+// (Slow cell rotation is read by the cell mass every frame.)
+export function applyVisuals() {
+  const page = document.body.classList
+  page.toggle('hide-name', settings.hideName)
+  page.toggle('hide-earnings', settings.hideEarnings)
+  page.toggle('center-currency', settings.centerCurrency)
 }
-button.addEventListener('click', () => setOpen(!panel.classList.contains('open')))
-document.addEventListener('pointerdown', (e) => { if (!wrap.contains(e.target)) setOpen(false) })
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false) })
+
+for (const box of modal.querySelectorAll('[data-setting]')) {
+  box.checked = settings[box.dataset.setting]
+  box.addEventListener('change', () => {
+    settings[box.dataset.setting] = box.checked
+    saveSettings()
+    applyVisuals()
+  })
+}
+applyVisuals()
