@@ -1,25 +1,48 @@
-// Clicking a colony's cells
+// Clicking a colony's cells, and showing what clicks and auto clicks earn
 import { game } from '../state.js'
 import { click } from '../actions.js'
 import { clickCooldown } from '../rules.js'
-import { nearestCell } from '../cells/mass.js'
+import { STAGES } from '../data/stages.js'
+import { nearestCell, cellPoint } from '../cells/mass.js'
 import { bounce } from '../cells/bounce.js'
+import { COLORS, label, addFloater, addRipple } from '../fx/effects.js'
+import { playClick } from '../audio/sfx.js'
 import { views } from './screens.js'
 import { pane } from './pane.js'
 import { pop } from './header.js'
 
 for (const v of views) {
+  v.area.addEventListener('pointerdown', () => { if (game.colonies[v.i].unlocked || game.pending) playClick() })
   v.area.addEventListener('click', (e) => clickColony(v, e.clientX - pane.left, e.clientY - pane.top))
 }
 
 // x, y: where the click landed on the pane
 export function clickColony(v, x, y) {
-  if (game.view !== v.i) return
+  if (pane.sliding || game.view !== v.i) return
   const hit = click(game, v.i, performance.now())
   if (!hit) return
-  bounce(v, nearestCell(v, x, y), clickCooldown(game, v.i))
+  const clicked = nearestCell(v, x, y)
+  showYield(v, hit.perCell, hit.crit ? COLORS.crit : COLORS.click, clicked, x, y)
+  bounce(v, clicked, clickCooldown(game, v.i))
+  addRipple(v.i, x, y, hit.crit ? COLORS.crit : STAGES[v.stage].colors[0], hit.crit)
   if (hit.crit) pop()
   coolDown(v)
+}
+
+// Auto clicks on the colony on screen float up in red (orange for crits). Not while catching up.
+export function showAutoTick(i, hit) {
+  if (!hit || hit.ticks > 5 || game.view !== i || document.hidden || pane.sliding) return
+  showYield(views[i], hit.perCell, hit.crit ? COLORS.autoCrit : COLORS.auto)
+}
+
+// What ONE cell made floats up over every cell (over the click point for the clicked one)
+function showYield(v, amount, color, clicked = -1, x = 0, y = 0) {
+  const tag = label(amount, color)
+  v.cells.forEach((c, i) => {
+    const p = cellPoint(v, c), jiggle = () => Math.random() * 40 - 20
+    if (i === clicked) addFloater(v.i, x, y - 12, tag)
+    else addFloater(v.i, p.x + jiggle(), p.y + jiggle(), tag)
+  })
 }
 
 // The whole mass dims until the next click is allowed

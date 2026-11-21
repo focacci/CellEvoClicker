@@ -8,6 +8,7 @@ import * as R from '../rules.js'
 import { short } from '../format.js'
 import { buyMutation } from '../actions.js'
 import { saveGame } from '../save.js'
+import { playTink } from '../audio/sfx.js'
 import { game } from '../state.js'
 
 export const mutationsTab = el('div', 'upgrade-group')
@@ -62,6 +63,7 @@ function addCard(i, m, animate) {
 
 function buy(i, key) {
   if (!buyMutation(game, i, key)) return
+  playTink()
   flashBought(cards[key])
   saveGame(game)
 }

@@ -14,7 +14,11 @@ import { renderHeader } from './ui/header.js'
 import { mutationsTab, renderMutations } from './ui/mutationsTab.js'
 import { toast } from './ui/toast.js'
 import { renderScreens } from './ui/screens.js'
-import './ui/clicks.js'
+import { showAutoTick } from './ui/clicks.js'
+import { renderAmbient } from './fx/ambient.js'
+import { renderFx } from './fx/effects.js'
+import { syncMusic } from './audio/music.js'
+import './ui/settingsMenu.js'
 
 const saved = await loadGame()
 if (saved) {
@@ -26,12 +30,14 @@ $('#upgrades-container').appendChild(mutationsTab)
 mutationsTab.classList.add('active')
 
 function tick(now) {
-  game.colonies.forEach((c, i) => autoTick(game, i, now))
+  game.colonies.forEach((c, i) => showAutoTick(i, autoTick(game, i, now)))
 }
 
 function render(now, dt) {
   renderHeader(game, dt)
   renderScreens()
+  renderAmbient(now, dt)
+  renderFx(now)
   renderMutations(game.view)
 }
 
@@ -44,6 +50,7 @@ function frame(now) {
   render(now, dt)
 }
 requestAnimationFrame(frame)
+syncMusic()
 
 // Hidden tabs get no animation frames, so a slow timer keeps auto clicks going
 setInterval(() => { if (document.hidden) tick(performance.now()) }, 1000)
