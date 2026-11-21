@@ -60,7 +60,15 @@
         </div>
 
         <div class="upgrades-pane" id="upgrades-pane">
-            <div class="pane-title" id="pane-title">Mutations</div>
+            <div class="pane-title" id="pane-title">
+                <button class="tab-arrow" id="tab-prev" type="button" aria-label="Previous tab">
+                    <svg viewBox="0 0 24 24"><path d="M14.5 5 L7.5 12 L14.5 19"/></svg>
+                </button>
+                <span id="pane-title-text">Mutations</span>
+                <button class="tab-arrow" id="tab-next" type="button" aria-label="Next tab">
+                    <svg viewBox="0 0 24 24"><path d="M9.5 5 L16.5 12 L9.5 19"/></svg>
+                </button>
+            </div>
             <div class="upgrades-list" id="upgrades-container">
                 <!-- Upgrades injected by JavaScript -->
             </div>

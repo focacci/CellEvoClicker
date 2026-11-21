@@ -29,6 +29,31 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent);
     transition: color 0.3s ease, text-shadow 0.3s ease, filter 0.45s ease, opacity 0.45s ease;
 }
+/* ‹ Mutations › switcher */
+.pane-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+.tab-arrow {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s, transform 0.2s;
+}
+.tab-arrow:hover { color: var(--text-main); border-color: rgba(96, 165, 250, 0.65); background: rgba(37, 99, 235, 0.15); }
+.tab-arrow:active { transform: scale(0.92); }
+.tab-arrow svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.pane-title.no-arrows .tab-arrow { visibility: hidden; }
 .pane-title.rebirth-mode {
     color: var(--rebirth-text);
     text-shadow: 0 0 14px rgba(191, 64, 191, 0.45);
@@ -265,3 +290,29 @@
     0%, 100% { box-shadow: 0 0 0 1px #000, 0 0 0 0 rgba(191, 64, 191, 0); }
     50%      { box-shadow: 0 0 0 1px #000, 0 0 22px 2px rgba(191, 64, 191, 0.55); }
 }
+
+/* Stats tab */
+.stat-group {
+    background: linear-gradient(180deg, #111b31 0%, #0f172a 100%);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+}
+.stat-group h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent-primary);
+    margin-bottom: 0.45rem;
+}
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.22rem 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.stat-row b { color: var(--text-main); font-variant-numeric: tabular-nums; white-space: nowrap; }

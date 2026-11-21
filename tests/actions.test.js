@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { click, autoTick, buyMutation, unlockColony, rebirth, wake, buyRebirth, collectOffline, clocks } from '../src/actions.js'
+import { click, autoTick, buyMutation, unlockColony, rebirth, wake, buyRebirth, collectOffline, addPlayTime, clocks } from '../src/actions.js'
 import { newGame } from '../src/state.js'
 
 function setup(levels = {}) {
@@ -136,4 +136,12 @@ test('Dormant Spores pay for the time the game was closed', () => {
   assert.equal(g.money, 1800)
   g.t = 0
   assert.equal(collectOffline(g, 5e12).gain, 0, 'no save time, no offline DNA')
+})
+
+test('time played adds up, but one long gap (a sleeping computer) is capped', () => {
+  const g = setup()
+  addPlayTime(g, 1.5)
+  addPlayTime(g, 8 * 3600)
+  addPlayTime(g, -3)
+  assert.equal(g.played, 121.5)
 })

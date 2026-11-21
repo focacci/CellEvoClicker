@@ -8,7 +8,7 @@ import './styles/panel.css'
 import './styles/popups.css'
 import { game } from './state.js'
 import { loadGame, cleanSave, saveGame } from './save.js'
-import { autoTick, collectOffline } from './actions.js'
+import { autoTick, collectOffline, addPlayTime } from './actions.js'
 import { long } from './format.js'
 import { renderHeader } from './ui/header.js'
 import { renderPanel } from './ui/panel.js'
@@ -38,7 +38,10 @@ function welcomeBack(saved) {
   toast('Welcome back! Your progress was restored.')
 }
 
+let lastTick = performance.now()
 function tick(now) {
+  addPlayTime(game, (now - lastTick) / 1000)
+  lastTick = now
   game.colonies.forEach((c, i) => showAutoTick(i, autoTick(game, i, now)))
 }
 

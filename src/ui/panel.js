@@ -1,25 +1,44 @@
-// The side panel: Mutations, or Rebirth Mutations while the cell is dormant
+// The side panel and its ‹ Mutations › switcher. The arrows loop through the tabs both ways.
 import { $, setText } from './dom.js'
 import { mutationsTab, renderMutations } from './mutationsTab.js'
 import { rebirthTab, renderRebirthTab } from './rebirthTab.js'
+import { statsTab, renderStats } from './statsTab.js'
 import { game } from '../state.js'
 
+const TABS = ['mutations', 'stats']
+const PAGES = {
+  mutations: { title: 'Mutations', el: mutationsTab, render: () => renderMutations(game.view) },
+  rebirth: { title: 'Rebirth Mutations', el: rebirthTab, render: renderRebirthTab },
+  stats: { title: 'Stats', el: statsTab, render: renderStats }
+}
 const panel = $('#upgrades-pane'), list = $('#upgrades-container'), title = $('#pane-title')
-list.append(mutationsTab, rebirthTab)
+let tab = 0
 let shown = null
 
+list.append(...Object.values(PAGES).map(p => p.el))
+$('#tab-prev').addEventListener('click', () => { tab = (tab + TABS.length - 1) % TABS.length })
+$('#tab-next').addEventListener('click', () => { tab = (tab + 1) % TABS.length })
+
+// While the cell is dormant after a rebirth, the Mutations slot shows Rebirth Mutations
+function page() {
+  const id = TABS[tab]
+  return PAGES[id === 'mutations' && game.pending ? 'rebirth' : id]
+}
+
 export function renderPanel() {
-  const tab = game.pending ? rebirthTab : mutationsTab
-  if (tab !== shown) {
+  // A locked colony shows Mutations (greyed out), and the panel stays on Mutations afterwards
+  const locked = !game.pending && !game.colonies[game.view].unlocked
+  if (locked) tab = 0
+  const p = page()
+  if (p.el !== shown) {
     shown?.classList.remove('active')
-    tab.classList.add('active')
+    p.el.classList.add('active')
     list.scrollTop = 0
-    shown = tab
+    shown = p.el
   }
-  setText(title, game.pending ? 'Rebirth Mutations' : 'Mutations')
-  title.classList.toggle('rebirth-mode', game.pending)
-  // Viewing a colony that hasn't been bought yet greys out the whole panel
-  panel.classList.toggle('greyed', !game.pending && !game.colonies[game.view].unlocked)
-  if (game.pending) renderRebirthTab()
-  else renderMutations(game.view)
+  setText($('#pane-title-text'), p.title)
+  title.classList.toggle('rebirth-mode', p === PAGES.rebirth)
+  title.classList.toggle('no-arrows', locked)
+  panel.classList.toggle('greyed', locked)
+  p.render()
 }

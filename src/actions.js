@@ -114,3 +114,9 @@ export function collectOffline(game, now = Date.now()) {
   earn(game, gain)
   return { gain, secs }
 }
+
+// Time played counts while the game is open (a background tab too), not while it is closed.
+// One step is capped at 2 minutes, so a computer waking from sleep doesn't add the whole night.
+export function addPlayTime(game, seconds) {
+  game.played += Math.min(120, Math.max(0, seconds))
+}
