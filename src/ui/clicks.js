@@ -1,6 +1,6 @@
 // Clicking a colony's cells, and showing what clicks and auto clicks earn
 import { game } from '../state.js'
-import { click } from '../actions.js'
+import { click, wake } from '../actions.js'
 import { clickCooldown } from '../rules.js'
 import { STAGES } from '../data/stages.js'
 import { nearestCell, cellPoint } from '../cells/mass.js'
@@ -10,6 +10,8 @@ import { playClick } from '../audio/sfx.js'
 import { views } from './screens.js'
 import { pane } from './pane.js'
 import { pop } from './header.js'
+import { spawnRing } from '../cells/junctions.js'
+import { saveGame } from '../save.js'
 
 for (const v of views) {
   v.area.addEventListener('pointerdown', () => { if (game.colonies[v.i].unlocked || game.pending) playClick() })
@@ -19,6 +21,7 @@ for (const v of views) {
 // x, y: where the click landed on the pane
 export function clickColony(v, x, y) {
   if (pane.sliding || game.view !== v.i) return
+  if (game.pending) return wakeUp(v)
   const hit = click(game, v.i, performance.now())
   if (!hit) return
   const clicked = nearestCell(v, x, y)
@@ -27,6 +30,14 @@ export function clickColony(v, x, y) {
   addRipple(v.i, x, y, hit.crit ? COLORS.crit : STAGES[v.stage].colors[0], hit.crit)
   if (hit.crit) pop()
   coolDown(v)
+}
+
+// The dormant cell after a rebirth: clicking it starts the next cycle
+function wakeUp(v) {
+  if (!wake(game)) return
+  bounce(v, -1, 300)
+  v.cells.forEach(c => spawnRing(v, c))
+  saveGame(game)
 }
 
 // Auto clicks on the colony on screen float up in red (orange for crits). Not while catching up.

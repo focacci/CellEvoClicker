@@ -49,6 +49,7 @@ function rebuild(i) {
   for (const key in cards) cards[key].card.remove()
   cards = {}
   shownColony = i
+  if (mutationsTab.parentElement) mutationsTab.parentElement.scrollTop = 0
   for (const m of MUTATIONS) if (R.isRevealed(game, i, m.key)) addCard(i, m, false)
 }
 

@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { click, autoTick, buyMutation, unlockColony, clocks } from '../src/actions.js'
+import { click, autoTick, buyMutation, unlockColony, rebirth, wake, buyRebirth, collectOffline, clocks } from '../src/actions.js'
 import { newGame } from '../src/state.js'
 
 function setup(levels = {}) {
@@ -77,4 +77,63 @@ test('unlocking a colony costs its price and gives rebirth starting levels', () 
   assert.equal(g.colonies[1].levels.autoClickCooldown, 12)
   assert.equal(g.colonies[1].levels.extraCells, 6)
   assert.equal(unlockColony(g, 1), false, 'already unlocked')
+})
+
+test('rebirth pays whole RNA, carries the fraction and resets the cycle', () => {
+  const g = setup({ clickPower: 50 })
+  g.money = 9e12
+  assert.equal(rebirth(g), 0, 'needs 10 Trillion')
+  g.money = 4.84e13 // √4.84 = 2.2
+  g.frac = 0.9
+  g.colonies[1].unlocked = true
+  g.played = 99
+  g.achievements = ['first-click']
+  const total = rebirth(g)
+  assert.ok(Math.abs(total - 3.1) < 1e-9)
+  assert.equal(g.rdna, 3)
+  assert.equal(g.earned, 3)
+  assert.ok(Math.abs(g.frac - 0.1) < 1e-9)
+  assert.equal(g.rebirths, 1)
+  assert.equal(g.money, 0)
+  assert.equal(g.pending, true)
+  assert.equal(g.colonies[0].levels.clickPower, 0)
+  assert.deepEqual(g.colonies.map(c => c.unlocked), [true, false, false])
+  assert.equal(g.played, 99, 'time played survives rebirth')
+  assert.deepEqual(g.achievements, ['first-click'], 'achievements survive rebirth')
+  assert.equal(click(g, 0, 1e9), null, 'the dormant cell does not pay')
+})
+
+test('waking the dormant cell applies Spore Reserve, kept colonies and starting levels', () => {
+  const g = setup()
+  g.pending = true
+  g.owned = ['reserve', 'colony3', 'hereditary']
+  assert.equal(wake(g), true)
+  assert.equal(g.pending, false)
+  assert.equal(g.money, 1e6)
+  assert.deepEqual(g.colonies.map(c => c.unlocked), [true, false, true])
+  assert.equal(g.colonies[0].levels.clickPower, 25)
+  assert.equal(g.colonies[2].levels.autoClickPower, 25)
+  assert.equal(g.colonies[1].levels.clickPower, 0)
+  assert.equal(wake(g), false)
+})
+
+test('rebirth mutations are bought once with RNA', () => {
+  const g = setup()
+  g.rdna = 5
+  assert.equal(buyRebirth(g, 'reserve'), true)
+  assert.equal(g.rdna, 1)
+  assert.equal(buyRebirth(g, 'reserve'), false)
+  assert.equal(buyRebirth(g, 'membrane'), false, 'costs 7')
+  assert.equal(buyRebirth(g, 'bogus'), false)
+  assert.deepEqual(g.owned, ['reserve'])
+})
+
+test('Dormant Spores pay for the time the game was closed', () => {
+  const g = setup({ autoClickPower: 1 })
+  g.owned = ['spores']
+  g.t = 1_000_000
+  assert.deepEqual(collectOffline(g, 1_000_000 + 3600e3), { gain: 1800, secs: 3600 })
+  assert.equal(g.money, 1800)
+  g.t = 0
+  assert.equal(collectOffline(g, 5e12).gain, 0, 'no save time, no offline DNA')
 })

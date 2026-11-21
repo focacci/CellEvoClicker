@@ -16,11 +16,13 @@ export const views = COLONIES.map((c, i) => {
   v.badge = makeBadge(() => toggleStageList(v))
   content.append(v.badge, area)
   screen.appendChild(content)
+  if (i === 0) screen.appendChild(el('div', 'rebirth-hint', 'Click the cell to begin a new cycle'))
   track.appendChild(screen)
   return v
 })
 
 export function renderScreens() {
+  views[0].screen.classList.toggle('dormant', game.pending) // greyed out after a rebirth, until clicked
   for (const v of views) {
     syncMass(v, cellCount(game, v.i), stageOf(game, v.i))
     renderBadge(v)

@@ -1,6 +1,8 @@
 // The ONLY code that changes `game`. Each action returns what happened, so the UI can show it.
 import * as R from './rules.js'
 import { COLONIES } from './data/colonies.js'
+import { REBIRTH } from './data/rebirth.js'
+import { newCycle } from './state.js'
 
 // When each colony last clicked / auto-ticked (ms). Not saved.
 export const clocks = { click: COLONIES.map(() => -Infinity), auto: COLONIES.map(() => performance.now()) }
@@ -72,4 +74,43 @@ export function unlockColony(game, i) {
   c.unlocked = true
   startColony(game, i)
   return true
+}
+
+// Whole RNA is paid out; the leftover fraction carries over to the next rebirth. Returns the RNA earned.
+export function rebirth(game) {
+  if (game.pending || game.money < R.REBIRTH_REQ) return 0
+  const total = R.rebirthGain(game) + game.frac
+  const whole = Math.floor(total)
+  game.frac = Math.max(0, total - whole)
+  game.rdna += whole
+  game.earned += whole
+  game.rebirths++
+  newCycle(game)
+  return total
+}
+
+// Clicking the dormant cell starts the next cycle
+export function wake(game) {
+  if (!game.pending) return false
+  game.pending = false
+  game.money += R.perk(game, 'startDna')
+  for (const r of R.perks(game)) if (r.keepColony) game.colonies[r.keepColony].unlocked = true
+  game.colonies.forEach((c, i) => { if (c.unlocked) startColony(game, i) })
+  return true
+}
+
+export function buyRebirth(game, id) {
+  const r = REBIRTH.find(r => r.id === id)
+  if (!r || game.owned.includes(id) || game.rdna < r.cost) return false
+  game.rdna -= r.cost
+  game.owned.push(id)
+  return true
+}
+
+// Dormant Spores: DNA made while the game was closed
+export function collectOffline(game, now = Date.now()) {
+  const secs = game.t ? Math.min(R.OFFLINE_CAP, (now - game.t) / 1000) : 0
+  const gain = R.offlineGain(game, secs)
+  earn(game, gain)
+  return { gain, secs }
 }
