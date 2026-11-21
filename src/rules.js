@@ -54,11 +54,11 @@ export const stageOf = (game, i) => stageIndex(totalLevels(game, i))
 // Evolutionary Leap: ×1.1 for every stage reached (a stage's own leapMult replaces the 1.1)
 const LEAP = STAGES.map((_, i) => STAGES.slice(1, i + 1).reduce((m, s) => m * (s.leapMult || 1.1), 1))
 
-export function stageMult(game, i) {
+function stageMult(game, i) {
   return perk(game, 'leap') ? LEAP[stageOf(game, i)] : 1
 }
 
-export function allMult(game) {
+function allMult(game) {
   return bonus(game, 'all') * (1 + perk(game, 'echo') * game.earned)
 }
 

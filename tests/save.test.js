@@ -85,3 +85,15 @@ test('achievements in a save keep only known ids', () => {
   const g = cleanSave({ v: 2, achievements: ['first-click', 'nope', 'first-click', 'immortality'] })
   assert.deepEqual(g.achievements, ['first-click', 'immortality'])
 })
+
+test('export and import a save as a text code', async () => {
+  const { exportCode, readCode } = await import('../src/save.js')
+  const g = cleanSave(parseSave(OLD_SAVE))
+  g.achievements = ['first-click']
+  const code = exportCode(g)
+  assert.match(code, /^[A-Za-z0-9+/=]+$/)
+  assert.deepEqual(cleanSave(readCode(code)), g)
+  assert.deepEqual(cleanSave(readCode('  ' + btoa(OLD_SAVE) + '\n')).colonies[0].levels, LEVELS, 'an old save works too')
+  assert.equal(readCode('hello'), null)
+  assert.equal(readCode(btoa('{"v":1}')), null)
+})

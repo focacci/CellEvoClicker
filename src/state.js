@@ -2,11 +2,11 @@
 import { COLONIES } from './data/colonies.js'
 import { MUTATIONS } from './data/mutations.js'
 
-export function zeroLevels() {
+function zeroLevels() {
   return Object.fromEntries(MUTATIONS.map(m => [m.key, 0]))
 }
 
-export function newColonies() {
+function newColonies() {
   return COLONIES.map((c, i) => ({ unlocked: i === 0, levels: zeroLevels() }))
 }
 

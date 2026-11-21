@@ -32,7 +32,7 @@ $('#vol-sfx').addEventListener('change', playClick) // hear the new effects leve
 
 // Visual: each switch turns a class on the page on or off.
 // (Slow cell rotation is read by the cell mass every frame.)
-export function applyVisuals() {
+function applyVisuals() {
   const page = document.body.classList
   page.toggle('hide-name', settings.hideName)
   page.toggle('hide-earnings', settings.hideEarnings)

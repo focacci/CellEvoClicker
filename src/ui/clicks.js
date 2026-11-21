@@ -33,7 +33,7 @@ addEventListener('keydown', (e) => {
 })
 
 // x, y: where the click landed on the pane
-export function clickColony(v, x, y) {
+function clickColony(v, x, y) {
   if (pane.sliding || game.view !== v.i) return
   if (game.pending) return wakeUp(v)
   const hit = click(game, v.i, performance.now())

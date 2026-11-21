@@ -21,7 +21,7 @@ button.addEventListener('click', () => {
 })
 
 // RNA with two decimals, rounded down so it never overstates: "12.37"
-export function rnaAmount(total) {
+function rnaAmount(total) {
   const whole = Math.floor(total), dec = Math.floor((total - whole) * 100) / 100
   return commas(whole) + (dec > 0 ? dec.toFixed(2).slice(1) : '')
 }

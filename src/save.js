@@ -6,7 +6,7 @@ import { ACHIEVEMENTS } from './data/achievements.js'
 import { THEMES } from './data/themes.js'
 import { themeById, ownsTheme } from './themes.js'
 
-export const SAVE_KEY = 'cellEvoClicker.save.v2'
+const SAVE_KEY = 'cellEvoClicker.save.v2'
 
 // Storage can be blocked (e.g. in a sandboxed frame): then the game still runs, it just can't save
 export const storage = (() => { try { return localStorage } catch { return null } })()
@@ -61,7 +61,7 @@ function cleanColony(c, saved) {
 
 // v0.3.5 also kept a copy in IndexedDB. Read it once when localStorage has no save,
 // and never write it again. (Delete this a few months after 1.0.0.)
-export function readOldBackup() {
+function readOldBackup() {
   return new Promise(resolve => {
     if (typeof indexedDB === 'undefined') return resolve(null)
     const req = indexedDB.open('cellEvoClicker', 1)
@@ -78,7 +78,7 @@ export function readOldBackup() {
 }
 
 export async function loadGame() {
-  return parseSave(storage?.getItem(SAVE_KEY)) ?? parseSave(await readOldBackup())
+  return parseSave(storage?.getItem(SAVE_KEY)) ?? parseSave(await readOldBackup().catch(() => null)) // some sandboxed pages refuse IndexedDB
 }
 
 // Full reset: erase the save (and the old IndexedDB copy). Settings live under their own key and stay.
@@ -90,4 +90,20 @@ export function wipeSave() {
     const req = indexedDB.deleteDatabase('cellEvoClicker')
     req.onsuccess = req.onerror = req.onblocked = () => resolve()
   })
+}
+
+// Export/Import: the save as a text code, to back it up or move it to another computer
+export function exportCode(game) {
+  game.t = Date.now()
+  return btoa(JSON.stringify(game))
+}
+
+export function readCode(code) {
+  try { return parseSave(atob(code.trim())) } catch { return null }
+}
+
+// Replaces the save; the page then reloads (saving is blocked so the old game can't write over it)
+export function importSave(save) {
+  storage?.setItem(SAVE_KEY, JSON.stringify(cleanSave(save)))
+  blocked = true
 }

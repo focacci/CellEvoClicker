@@ -27,11 +27,13 @@ import { renderFx } from './fx/effects.js'
 import { syncMusic } from './audio/music.js'
 import './ui/settingsMenu.js'
 import './ui/resetModal.js'
+import './ui/saveCode.js'
 
 const saved = await loadGame()
 if (saved) welcomeBack(saved)
 if (import.meta.env.DEV) window.game = game // set levels from the console to try out stages
 goTo(game.view, true)
+renderWornTheme()
 
 function welcomeBack(saved) {
   Object.assign(game, cleanSave(saved))

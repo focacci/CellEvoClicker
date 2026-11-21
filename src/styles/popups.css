@@ -116,6 +116,22 @@
     margin-bottom: 0.7rem;
 }
 .modal.settings .modal-btn { width: 100%; margin-bottom: 0.5rem; }
+#save-code {
+    width: 100%;
+    margin-bottom: 0.6rem;
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--line);
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font: 0.72rem/1.35 ui-monospace, Menlo, Consolas, monospace;
+    resize: vertical;
+    user-select: text;
+}
+.modal.settings .modal-actions { margin-bottom: 0.5rem; }
+.modal.settings .modal-actions .modal-btn { margin-bottom: 0; font-size: 0.85rem; }
+.modal.settings .save-note { font-size: 0.75rem; margin: 0 0 0.5rem; }
+.modal.settings .save-note:empty { display: none; }
 .modal-close {
     position: absolute;
     top: 0.7rem;

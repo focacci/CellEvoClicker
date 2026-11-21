@@ -119,6 +119,13 @@
             </section>
             <section>
                 <h3>Game</h3>
+                <p class="save-note">A save code backs up your game or moves it to another computer. Importing one replaces this game.</p>
+                <textarea id="save-code" rows="3" spellcheck="false" placeholder="Paste a save code here, then Import"></textarea>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn" id="export-save">Export</button>
+                    <button type="button" class="modal-btn" id="import-save">Import</button>
+                </div>
+                <p class="save-note" id="save-note" aria-live="polite"></p>
                 <button type="button" class="modal-btn danger" id="reset-open">Reset game…</button>
             </section>
         </div>

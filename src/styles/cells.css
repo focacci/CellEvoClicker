@@ -22,7 +22,6 @@
 }
 /* Click cooldown dims the whole mass in one GPU-friendly filter instead of every cell */
 .cell-mass.cooldown { filter: saturate(0.5) brightness(0.7); }
-.no-anim, .no-anim * { transition: none !important; }
 
 .mass-layer,
 .mass-spin { position: absolute; left: 0; top: 0; width: 0; height: 0; }
