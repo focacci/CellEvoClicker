@@ -15,6 +15,8 @@ import { mutationsTab, renderMutations } from './ui/mutationsTab.js'
 import { toast } from './ui/toast.js'
 import { renderScreens } from './ui/screens.js'
 import { showAutoTick } from './ui/clicks.js'
+import { renderLocks } from './ui/locks.js'
+import { goTo, renderSlide } from './ui/colonies.js'
 import { renderAmbient } from './fx/ambient.js'
 import { renderFx } from './fx/effects.js'
 import { syncMusic } from './audio/music.js'
@@ -28,14 +30,18 @@ if (saved) {
 if (import.meta.env.DEV) window.game = game // set levels from the console to try out stages
 $('#upgrades-container').appendChild(mutationsTab)
 mutationsTab.classList.add('active')
+goTo(game.view, true)
 
 function tick(now) {
   game.colonies.forEach((c, i) => showAutoTick(i, autoTick(game, i, now)))
 }
 
 function render(now, dt) {
+  renderSlide(now)
   renderHeader(game, dt)
   renderScreens()
+  renderLocks()
+  $('#upgrades-pane').classList.toggle('greyed', !game.pending && !game.colonies[game.view].unlocked)
   renderAmbient(now, dt)
   renderFx(now)
   renderMutations(game.view)

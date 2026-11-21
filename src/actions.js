@@ -56,3 +56,20 @@ export function buyMutation(game, i, key) {
   game.colonies[i].levels[key]++
   return true
 }
+
+// Starting levels from rebirth mutations (Reflex Imprint, Budding Instinct, Hereditary Strength)
+function startColony(game, i) {
+  const levels = game.colonies[i].levels
+  for (const r of R.perks(game)) {
+    for (const key in r.startLevels) levels[key] = Math.max(levels[key], r.startLevels[key])
+  }
+}
+
+export function unlockColony(game, i) {
+  const c = game.colonies[i], cost = COLONIES[i].unlockCost
+  if (c.unlocked || game.pending || game.money < cost) return false
+  game.money -= cost
+  c.unlocked = true
+  startColony(game, i)
+  return true
+}

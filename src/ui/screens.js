@@ -10,7 +10,7 @@ import { game } from '../state.js'
 
 const track = $('#screen-track')
 
-export const views = COLONIES.slice(0, 1).map((c, i) => {
+export const views = COLONIES.map((c, i) => {
   const screen = el('section', 'screen'), content = el('div', 'screen-content'), area = el('div', 'cell-container')
   const v = { i, screen, content, ...buildMass(area) }
   v.badge = makeBadge(() => toggleStageList(v))

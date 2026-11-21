@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { click, autoTick, buyMutation, clocks } from '../src/actions.js'
+import { click, autoTick, buyMutation, unlockColony, clocks } from '../src/actions.js'
 import { newGame } from '../src/state.js'
 
 function setup(levels = {}) {
@@ -62,4 +62,19 @@ test('buying a mutation spends DNA and raises its level', () => {
   g.money = 1e9
   g.colonies[0].levels.clickCooldown = 10
   assert.equal(buyMutation(g, 0, 'clickCooldown'), false, 'maxed')
+})
+
+test('unlocking a colony costs its price and gives rebirth starting levels', () => {
+  const g = setup()
+  g.money = 99e9
+  assert.equal(unlockColony(g, 1), false, 'Colony II costs 100 Billion')
+  g.money = 1e11
+  g.owned = ['reflex', 'budding']
+  assert.equal(unlockColony(g, 1), true)
+  assert.equal(g.money, 0)
+  assert.equal(g.colonies[1].unlocked, true)
+  assert.equal(g.colonies[1].levels.clickCooldown, 10)
+  assert.equal(g.colonies[1].levels.autoClickCooldown, 12)
+  assert.equal(g.colonies[1].levels.extraCells, 6)
+  assert.equal(unlockColony(g, 1), false, 'already unlocked')
 })
